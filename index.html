@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Groundhopr — Code &amp; Product Review</title>
+<meta name="description" content="Independent code and product/UX review of the Groundhopr football-travel app." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+<style>
+  :root {
+    --bg: #f4f6f0;
+    --panel: #ffffff;
+    --panel-2: #fbfcf9;
+    --ink: #16211a;
+    --ink-soft: #3f4a42;
+    --muted: #6b776d;
+    --line: #e3e8dd;
+    --line-strong: #d2dac9;
+    --accent: #8fbb1f;         /* lime, brand */
+    --accent-ink: #1a1a1a;
+    --green: #1a7a4a;          /* pitch green, links */
+    --green-deep: #14603a;
+    --crit: #c0392b;
+    --crit-bg: #fbecea;
+    --high: #c76a13;
+    --high-bg: #fbf0e2;
+    --med: #9a7d1e;
+    --med-bg: #faf4df;
+    --good: #2f8f5b;
+    --good-bg: #e9f5ed;
+    --code-bg: #14231a;
+    --code-ink: #e8efe4;
+    --code-line: #2b3d31;
+    --shadow: 0 1px 2px rgba(20,35,26,.04), 0 8px 24px rgba(20,35,26,.06);
+    --radius: 14px;
+    --maxw: 960px;
+    --read: 960px;
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e130f;
+      --panel: #161d17;
+      --panel-2: #131a14;
+      --ink: #eef2ea;
+      --ink-soft: #c3cdc0;
+      --muted: #8b968b;
+      --line: #263127;
+      --line-strong: #34412f;
+      --accent: #a4d233;
+      --green: #57c98a;
+      --green-deep: #3fae74;
+      --crit: #f0776a;
+      --crit-bg: #2a1614;
+      --high: #e79b4e;
+      --high-bg: #281c10;
+      --med: #d8bd5b;
+      --med-bg: #241f10;
+      --good: #5fc98c;
+      --good-bg: #12241a;
+      --code-bg: #0a120c;
+      --code-ink: #d8e2d4;
+      --code-line: #22311f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f6f0; --panel: #ffffff; --panel-2: #fbfcf9; --ink: #16211a; --ink-soft: #3f4a42;
+    --muted: #6b776d; --line: #e3e8dd; --line-strong: #d2dac9; --accent: #8fbb1f; --green: #1a7a4a;
+    --green-deep: #14603a; --crit: #c0392b; --crit-bg: #fbecea; --high: #c76a13; --high-bg: #fbf0e2;
+    --med: #9a7d1e; --med-bg: #faf4df; --good: #2f8f5b; --good-bg: #e9f5ed;
+    --code-bg: #14231a; --code-ink: #e8efe4; --code-line: #2b3d31;
+    --shadow: 0 1px 2px rgba(20,35,26,.04), 0 8px 24px rgba(20,35,26,.06);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e130f; --panel: #161d17; --panel-2: #131a14; --ink: #eef2ea; --ink-soft: #c3cdc0;
+    --muted: #8b968b; --line: #263127; --line-strong: #34412f; --accent: #a4d233; --green: #57c98a;
+    --green-deep: #3fae74; --crit: #f0776a; --crit-bg: #2a1614; --high: #e79b4e; --high-bg: #281c10;
+    --med: #d8bd5b; --med-bg: #241f10; --good: #5fc98c; --good-bg: #12241a;
+    --code-bg: #0a120c; --code-ink: #d8e2d4; --code-line: #22311f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); line-height: 1.6;
+    -webkit-font-smoothing: antialiased; font-size: 16.5px;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px 120px; }
+  .prose { max-width: var(--read); }
+  a { color: var(--green); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--green) 30%, transparent); }
+  a:hover { border-bottom-color: var(--green); }
+  h1, h2, h3 { text-wrap: balance; line-height: 1.15; }
+  p { margin: 0 0 14px; }
+  strong { font-weight: 700; color: var(--ink); }
+  code { font-family: var(--mono); font-size: .85em; background: color-mix(in srgb, var(--accent) 14%, transparent);
+    padding: .1em .4em; border-radius: 5px; color: var(--ink); }
+
+  /* ---- Masthead ---- */
+  .mast { padding: 68px 0 30px; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+  .kicker { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; font-weight: 700;
+    color: var(--muted); display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+  .kicker .dot { width: 9px; height: 9px; border-radius: 2px; background: var(--accent); transform: rotate(45deg); }
+  .mast h1 { font-size: clamp(34px, 6vw, 58px); font-weight: 800; letter-spacing: -.02em; margin: 0 0 14px;
+    color: var(--ink); }
+  .mast h1 .lime { color: var(--green); }
+  .mast .lede { font-size: 19px; color: var(--ink-soft); max-width: 640px; margin: 0; }
+  .mast .meta { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 26px; font-size: 13.5px; color: var(--muted); }
+  .mast .meta b { color: var(--ink-soft); font-weight: 600; }
+
+  /* ---- Scorecard ---- */
+  .verdict { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; margin: 8px 0 42px; }
+  @media (max-width: 720px) { .verdict { grid-template-columns: 1fr; } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); }
+  .verdict-main { padding: 26px 26px 24px; }
+  .verdict-main h2 { margin: 0 0 6px; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+  .verdict-main .score { font-size: 46px; font-weight: 800; letter-spacing: -.02em; line-height: 1.05; margin: 6px 0 2px; }
+  .verdict-main p { font-size: 14.5px; color: var(--ink-soft); margin: 10px 0 0; }
+  .tallies { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 22px; align-content: start; }
+  .tally { border: 1px solid var(--line); border-radius: 11px; padding: 14px 16px; background: var(--panel-2); }
+  .tally .n { font-size: 30px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .tally .l { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 7px; }
+  .tally.c { border-left: 4px solid var(--crit); } .tally.c .n { color: var(--crit); }
+  .tally.h { border-left: 4px solid var(--high); } .tally.h .n { color: var(--high); }
+  .tally.m { border-left: 4px solid var(--med); } .tally.m .n { color: var(--med); }
+  .tally.g { border-left: 4px solid var(--good); } .tally.g .n { color: var(--good); }
+
+  /* ---- Dimension bars ---- */
+  .dims { padding: 8px 4px 2px; }
+  .dim { display: grid; grid-template-columns: 150px 1fr 42px; align-items: center; gap: 16px; padding: 11px 0; border-top: 1px solid var(--line); }
+  .dim:first-child { border-top: none; }
+  .dim .name { font-weight: 600; font-size: 14.5px; }
+  .dim .track { height: 8px; border-radius: 6px; background: color-mix(in srgb, var(--muted) 22%, transparent); overflow: hidden; }
+  .dim .fill { height: 100%; border-radius: 6px; background: var(--green); }
+  .dim .val { font-size: 13px; font-weight: 700; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* ---- Section scaffolding ---- */
+  section { margin: 54px 0 0; scroll-margin-top: 20px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; padding-bottom: 14px; border-bottom: 2px solid var(--ink); }
+  .sec-head .idx { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--accent); }
+  .sec-head h2 { font-size: 27px; font-weight: 800; letter-spacing: -.015em; margin: 0; }
+  .sec-note { color: var(--muted); font-size: 14px; margin: 14px 0 26px; max-width: var(--read); }
+
+  /* pass banner */
+  .pass { display: inline-flex; align-items: center; gap: 9px; font-size: 12.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; padding: 6px 13px; border-radius: 100px; margin-bottom: 22px; }
+  .pass.now { background: var(--crit-bg); color: var(--crit); }
+  .pass.next { background: var(--high-bg); color: var(--high); }
+  .pass.later { background: var(--med-bg); color: var(--med); }
+
+  /* ---- Finding cards ---- */
+  .finding { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden; margin-bottom: 20px; }
+  .finding .bar { height: 5px; }
+  .finding.crit .bar { background: var(--crit); } .finding.high .bar { background: var(--high); }
+  .finding.med .bar { background: var(--med); } .finding.good .bar { background: var(--good); }
+  .finding-body { padding: 22px 24px 8px; }
+  .finding-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .sev { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; }
+  .sev.crit { background: var(--crit-bg); color: var(--crit); }
+  .sev.high { background: var(--high-bg); color: var(--high); }
+  .sev.med { background: var(--med-bg); color: var(--med); }
+  .sev.good { background: var(--good-bg); color: var(--good); }
+  .tag { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line-strong); padding: 4px 9px; border-radius: 6px; }
+  .finding-head h3 { flex: 1 1 100%; font-size: 19px; font-weight: 700; margin: 6px 0 0; letter-spacing: -.01em; }
+  .finding-body p { font-size: 15px; color: var(--ink-soft); }
+  .loc { font-family: var(--mono); font-size: 12.5px; color: var(--muted); background: var(--panel-2);
+    border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; }
+  .verify-flag { font-size: 13px; background: var(--med-bg); color: var(--med); border-radius: 8px; padding: 8px 12px; margin: 4px 0 12px; }
+
+  /* ---- Prompt block ---- */
+  .prompt { margin: 6px 0 22px; border-radius: 11px; overflow: hidden; border: 1px solid var(--code-line); }
+  .prompt-top { display: flex; align-items: center; justify-content: space-between; background: var(--code-bg);
+    padding: 9px 14px; border-bottom: 1px solid var(--code-line); }
+  .prompt-top .label { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: center; gap: 8px; }
+  .copy-btn { font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--code-ink);
+    background: color-mix(in srgb, var(--accent) 20%, transparent); border: 1px solid var(--code-line);
+    padding: 5px 12px; border-radius: 7px; cursor: pointer; transition: background .15s; }
+  .copy-btn:hover { background: color-mix(in srgb, var(--accent) 32%, transparent); }
+  .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .prompt pre { margin: 0; background: var(--code-bg); color: var(--code-ink); font-family: var(--mono);
+    font-size: 13px; line-height: 1.62; padding: 16px 16px; overflow-x: auto; white-space: pre-wrap; }
+
+  /* ---- Generic lists / good-bad ---- */
+  ul.checks { list-style: none; padding: 0; margin: 0 0 16px; max-width: var(--read); }
+  ul.checks li { position: relative; padding: 11px 0 11px 34px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+  ul.checks li:first-child { border-top: none; }
+  ul.checks li::before { position: absolute; left: 0; top: 10px; font-size: 15px; }
+  ul.checks.good li::before { content: "✓"; color: var(--good); font-weight: 800; }
+  ul.checks.bad li::before { content: "✕"; color: var(--crit); font-weight: 800; }
+  ul.checks li b { color: var(--ink); }
+
+  .callout { border-left: 3px solid var(--accent); background: var(--panel-2); padding: 16px 20px;
+    border-radius: 0 10px 10px 0; margin: 18px 0; font-size: 15px; color: var(--ink-soft); max-width: var(--read); }
+  .callout b { color: var(--ink); }
+
+  /* ---- TOC ---- */
+  .toc { background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; margin: 0 0 10px; }
+  .toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 0 14px; }
+  .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: t; columns: 2; column-gap: 34px; }
+  @media (max-width: 640px) { .toc ol { columns: 1; } }
+  .toc li { counter-increment: t; padding: 6px 0; break-inside: avoid; }
+  .toc li a { border: none; color: var(--ink-soft); font-size: 14.5px; display: flex; gap: 11px; }
+  .toc li a::before { content: counter(t, decimal-leading-zero); font-family: var(--mono); font-size: 12px;
+    color: var(--accent); font-weight: 700; }
+  .toc li a:hover { color: var(--green); }
+
+  /* ---- roadmap ---- */
+  .road { display: grid; gap: 14px; max-width: var(--read); }
+  .road-item { display: grid; grid-template-columns: 88px 1fr; gap: 18px; align-items: start;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; box-shadow: var(--shadow); }
+  .road-item .when { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; padding-top: 2px; }
+  .road-item.now .when { color: var(--crit); } .road-item.next .when { color: var(--high); } .road-item.later .when { color: var(--med); }
+  .road-item h3 { margin: 0 0 6px; font-size: 16.5px; }
+  .road-item p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+
+  .foot { margin-top: 60px; padding-top: 26px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  .foot .tag-line { font-weight: 700; color: var(--ink-soft); letter-spacing: .02em; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker"><span class="dot"></span> Independent Review &middot; Code &amp; Product</div>
+    <h1>Groundhopr: an honest <span class="lime">once-over</span></h1>
+    <p class="lede">A friendly but thorough assessment of the build and the experience &mdash; what's genuinely good, what's quietly broken, and exactly what to hand your AI coding assistant to fix it.</p>
+    <div class="meta">
+      <span><b>Prepared for</b> &middot; the project owner</span>
+      <span><b>Reviewed as</b> &middot; senior engineer + product/UX designer</span>
+      <span><b>Scope</b> &middot; full codebase + live app walkthrough</span>
+      <span><b>Context</b> &middot; first app, shipped and live</span>
+    </div>
+  </header>
+
+  <!-- VERDICT -->
+  <div class="verdict">
+    <div class="card verdict-main">
+      <h2>The short version</h2>
+      <div class="score">Impressive start &mdash; with 3 urgent leaks</div>
+      <p>For a first project this is genuinely good: a real, useful product with a clear idea, a nice search, a clever trip-checklist, working payments and a proper affiliate model. But it's a single 6,000-line file transpiled in the browser, and there are <b>three live issues that can cost real money or give away paid features for free</b>. None are hard to fix. Do those this week, then it's mostly polish and foundations.</p>
+    </div>
+    <div class="card tallies">
+      <div class="tally c"><div class="n">3</div><div class="l">Critical</div></div>
+      <div class="tally h"><div class="n">2</div><div class="l">Shipped bugs</div></div>
+      <div class="tally m"><div class="n">9+</div><div class="l">Improvements</div></div>
+      <div class="tally g"><div class="n">10+</div><div class="l">Done well</div></div>
+    </div>
+  </div>
+
+  <div class="card dims" style="padding:16px 24px;">
+    <div class="dim"><span class="name">Product idea</span><span class="track"><span class="fill" style="width:88%"></span></span><span class="val">8.5</span></div>
+    <div class="dim"><span class="name">UX &amp; design</span><span class="track"><span class="fill" style="width:74%"></span></span><span class="val">7.5</span></div>
+    <div class="dim"><span class="name">Security</span><span class="track"><span class="fill" style="width:34%;background:var(--crit)"></span></span><span class="val">3.5</span></div>
+    <div class="dim"><span class="name">Code quality</span><span class="track"><span class="fill" style="width:48%;background:var(--high)"></span></span><span class="val">5.0</span></div>
+    <div class="dim"><span class="name">Performance</span><span class="track"><span class="fill" style="width:52%;background:var(--high)"></span></span><span class="val">5.5</span></div>
+    <div class="dim"><span class="name">Foundations (build/tests)</span><span class="track"><span class="fill" style="width:30%;background:var(--crit)"></span></span><span class="val">3.0</span></div>
+  </div>
+
+  <!-- TOC -->
+  <section id="contents" style="margin-top:44px;">
+    <div class="toc">
+      <h2>What's in here</h2>
+      <ol>
+        <li><a href="#week">Fix this week &mdash; the 3 money/security leaks</a></li>
+        <li><a href="#bugs">Shipped bugs users hit right now</a></li>
+        <li><a href="#good">What's working well</a></li>
+        <li><a href="#ux">The experience &mdash; a designer's walkthrough</a></li>
+        <li><a href="#wizard">Rebuild the trip flow as a wizard (with live demo)</a></li>
+        <li><a href="#backend">The backend &mdash; strengthen the server layer</a></li>
+        <li><a href="#foundation">The foundation &amp; code quality</a></li>
+        <li><a href="#perf">Speed &amp; loading</a></li>
+        <li><a href="#roadmap">A sensible order to tackle it</a></li>
+        <li><a href="#howto">How to use the prompt blocks</a></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 1. CRITICAL -->
+  <section id="week">
+    <div class="sec-head"><span class="idx">01</span><h2>Fix this week</h2></div>
+    <div class="pass now">● Do these before anything else</div>
+    <p class="sec-note">These three are different from bugs: they're live risks to money and to the paid product. All are small, targeted fixes. Everything else in this report can wait behind them.</p>
+
+    <div class="finding crit">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head">
+          <span class="sev crit">Critical</span><span class="tag">Security &middot; billing</span>
+          <h3>The AI endpoint is an open door to your Anthropic bill</h3>
+        </div>
+        <p>The <span class="loc">functions/ai-trip.js</span> function forwards whatever it's sent straight to the paid Anthropic API using your key &mdash; with <b>no password, no rate limit, and no checks</b>. It even trusts the caller to pick the model, the length, and the tools. Anyone who finds the URL (it's visible in your public code) can script unlimited requests, run an expensive model, or turn on paid web-search &mdash; all billed to you. Open AI proxies get found and abused by bots within days.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Lock down functions/ai-trip.js. (1) Require a secret header "x-ghpr-key" that
+matches a new Netlify env var AI_TRIP_SHARED_SECRET; return 401 if it's missing
+or wrong. Update all three fetch() calls to /.netlify/functions/ai-trip in
+public/app.jsx to send that header. (2) Ignore any client-supplied "model" and
+hard-code "claude-haiku-4-5-20251001". (3) Cap max_tokens server-side at 1500.
+(4) Ignore any client-supplied "tools" field entirely. (5) Change the CORS
+header from "*" to "https://groundhopr.com". (6) Add per-IP rate limiting of
+~20 requests/hour using Netlify Blobs. (7) Delete the console.log lines that
+print the API key's presence and length.</pre>
+        </div>
+        <p style="font-size:13.5px;color:var(--muted);">Note: a secret embedded in the browser isn't unbreakable &mdash; it stops bots, not a determined attacker. The <b>rate limit + model/token caps</b> are what actually bound the cost. That's fine; it's the right first move.</p>
+      </div>
+    </div>
+
+    <div class="finding crit">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head">
+          <span class="sev crit">Critical</span><span class="tag">Security &middot; revenue</span>
+          <h3>&ldquo;Pro&rdquo; can likely be switched on for free from the browser</h3>
+        </div>
+        <p>Paid access is decided by an <code>is_pro</code> flag on the user's own <code>profiles</code> row, and the app already lets the browser edit that row. Unless the database explicitly forbids it, a user can open dev-tools and set <code>is_pro = true</code> &mdash; free Pro forever, bypassing the &pound;3/month. Related: there's no Stripe webhook in the code, so <b>paying customers may not be getting marked Pro automatically at all</b> &mdash; a real business bug, not just a security one.</p>
+        <div class="verify-flag">⚑ To confirm: this depends on your Supabase Row-Level Security setup, which can't be seen from the code. Check it today (next card covers how).</div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Payment state must never be writable by the browser. In Supabase: add a
+BEFORE UPDATE trigger on the "profiles" table that resets is_pro and
+trial_expires_at back to their old values unless the request uses the
+service_role key. Then create a Stripe webhook as a Netlify function that,
+on a successful subscription event, sets is_pro=true using the Supabase
+service_role key (which must only live in a Netlify env var, never in the
+browser). Point the Stripe subscription at this webhook.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding crit">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head">
+          <span class="sev crit">Critical</span><span class="tag">Security &middot; user data</span>
+          <h3>Verify the database lock (Row-Level Security) on every table</h3>
+        </div>
+        <p>Your Supabase key sits in the public code &mdash; which is <b>normal and fine</b>, but only because Supabase expects the real protection to live in database rules called Row-Level Security (RLS). Supabase ships new tables with RLS <b>off</b>, and it's easy to miss. If it's off or too loose on any table, then right now <b>anyone on the internet can read and edit every user's</b> saved grounds, trips, tips, comments and friend data. This must be checked before anything else.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Audit Supabase Row-Level Security. For each table used by the app -- profiles,
+pins, pitch_passports, fan_tips, tip_comments, friends -- confirm RLS is ENABLED
+and add policies so a logged-in user can only INSERT/UPDATE/DELETE rows that
+belong to them (auth.uid() = user_id, or = id for profiles). Keep public SELECT
+on pitch_passports by share_token, but restrict its writes to the owner. Give me
+the SQL for each policy and tell me which tables currently have RLS turned off.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. BUGS -->
+  <section id="bugs">
+    <div class="sec-head"><span class="idx">02</span><h2>Bugs users hit right now</h2></div>
+    <div class="pass next">● Quick wins &mdash; do these next</div>
+    <p class="sec-note">Features that are shipped and visible but silently don't work. These make the app feel unfinished and are all small fixes.</p>
+
+    <div class="finding high">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev high">High</span><span class="tag">Crash</span>
+          <h3>&ldquo;Download Trip Plan&rdquo; crashes every time</h3></div>
+        <p>The download button in the AI Trip Planner refers to three variables that don't exist anywhere in the code (<code>tripDates</code>, <code>tripDays</code>, <code>tripBudget</code>). Clicking it throws an error and nothing happens &mdash; a Pro feature that can't work at all. <span class="loc">app.jsx ~3737</span></p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>In public/app.jsx around line 3737, the "Download Trip Plan" handler references
+undefined variables tripDates, tripDays and tripBudget. The real state in that
+component is tripDateFrom, tripDateTo, tripAirport, tripExclude, tripNotes (and
+a computed tripDatesDisplay). Fix the handler to use the real variables, drop
+tripDays/tripBudget which don't exist, and test that the PDF download works.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev high">High</span><span class="tag">Silent failure</span>
+          <h3>The 3-day free trial probably never saves</h3></div>
+        <p>Starting a trial updates the profiles table filtering by <code>user_id</code>, but everywhere else in the code the profile row is keyed by <code>id</code>. If the column is <code>id</code> (as the rest of the code implies) this update matches nothing &mdash; the screen flips to &ldquo;Pro&rdquo; but the database never records it, so the trial vanishes on the next reload. <span class="loc">app.jsx ~5758</span></p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>In public/app.jsx, startTrial() updates the profiles table with .eq("user_id",
+userId) but every other profiles query uses .eq("id", userId). Confirm the
+primary key column name in Supabase, then make startTrial() use the same column
+as the rest of the file so trial_expires_at actually persists. Verify the trial
+survives a page reload.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Broken promise</span>
+          <h3>Three features look real but do nothing</h3></div>
+        <ul class="checks bad" style="margin-top:4px;">
+          <li><b>&ldquo;Attendees&rdquo;</b> lets you add group emails &ldquo;so everyone has the trip details&rdquo; &mdash; but nothing is sent or saved; the list disappears on refresh.</li>
+          <li><b>Contact form</b> shows &ldquo;Message sent, we reply within 48 hours&rdquo; but never sends anything anywhere.</li>
+          <li><b>Matchday Memory theme picker</b> defines 9 ticket themes, but the buttons aren't wired &mdash; the ticket is stuck on lime green.</li>
+        </ul>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Three features in public/app.jsx are shipped but non-functional. For each,
+either wire it up or remove the misleading UI/copy: (1) Pitch Passport
+"Attendees" collects emails but never sends or saves them -- persist them to the
+passport row and/or send invites, or remove the promise. (2) The Contact form's
+handleSubmit just sets sent=true; make it actually deliver the message (e.g. a
+Netlify form or an email function) or change the copy. (3) In MatchdayKeepsakePage
+the THEMES exist and themeKey state exists but setThemeKey is never called --
+wire the theme buttons so users can change the ticket colour.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Data &middot; badges</span>
+          <h3>Several badges can never be earned</h3></div>
+        <p>The away-day badges check a <code>homeAway</code> value that the &ldquo;Add Ground&rdquo; form never captures, and the keepsake badge is hard-coded to always return locked. So a chunk of the gamification is impossible to complete. There's also a duplicate club in the list (Bod&oslash;/Glimt appears twice).</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>In public/app.jsx: (1) The "Add Ground" form never records home/away, so the
+first_away/five_away/ten_away badges can never unlock -- add a Home/Away choice
+to the add-ground form and store it on the pin, then confirm the badge logic
+reads it. (2) The "keepsake" badge check is hard-coded to return false -- make
+it unlock when a user creates a Matchday Memory. (3) CLUBS has two entries for
+Bodo/Glimt with identical data -- remove the duplicate and rely on the existing
+CLUB_ALIASES map.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. GOOD -->
+  <section id="good">
+    <div class="sec-head"><span class="idx">03</span><h2>What's working well</h2></div>
+    <p class="sec-note">Worth saying clearly, because the list above is all problems: a lot here is done right, and some of it is better than many funded startups manage.</p>
+    <ul class="checks good">
+      <li><b>The core idea is strong and focused.</b> &ldquo;Plan a European away day in one search&rdquo; is a real need with a clear audience, and the app actually delivers it.</li>
+      <li><b>The Pitch Passport is a genuinely clever mechanic.</b> Turning trip planning into a 7-step checklist (fixture &rarr; flights &rarr; hotel &rarr; ticket &rarr; things to do &rarr; pre-match &rarr; group) with saved progress and a shareable link is the best part of the product.</li>
+      <li><b>Search &amp; autocomplete feel professional</b> &mdash; type a club and it resolves to stadium + city instantly, backed by a hand-built database of 150+ clubs with coordinates, capacities and official ticket links.</li>
+      <li><b>The affiliate model is thoughtfully wired</b> across the whole journey (flights, hotels, tickets, activities, rail, gear) with a clean partners bar &mdash; and it's monetised sensibly with Pro at &pound;3/month plus a trial and a shirt giveaway.</li>
+      <li><b>Honest, well-written legal footer</b> &mdash; affiliate disclosure, AI-inaccuracy disclaimer, and &ldquo;we're not a ticket reseller&rdquo;. Many commercial sites skip this; you didn't.</li>
+      <li><b>It's a proper installable PWA</b> &mdash; offline shell, home-screen install, splash screen, app manifest. That's ambitious for a first build.</li>
+      <li><b>Real, sensible error/empty/loading states</b> in most places (spinner messages, &ldquo;be the first to share&rdquo;, fixtures fallbacks).</li>
+      <li><b>The brand has personality.</b> &ldquo;Every ground has a story&rdquo;, the matey fan voice, the lime-and-black identity, the map of visited grounds &mdash; it feels like it's made by someone who loves the thing.</li>
+      <li><b>Graceful degradation</b> &mdash; when the live fixtures API isn't available, it falls back to embedded data instead of breaking.</li>
+      <li><b>Sensible privacy defaults</b> &mdash; a real cookie consent with an &ldquo;Essential Only&rdquo; option, not a dark pattern.</li>
+    </ul>
+  </section>
+
+  <!-- 4. UX -->
+  <section id="ux">
+    <div class="sec-head"><span class="idx">04</span><h2>The experience &mdash; a designer's walkthrough</h2></div>
+    <p class="sec-note">Reviewed on a phone (it's mobile-first). The bones are good; most of these are refinements that would make it feel more finished and convert better.</p>
+
+    <div class="finding high">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev high">High</span><span class="tag">First impression</span>
+          <h3>The first thing users see is app-install instructions</h3></div>
+        <p>On load, the top of the page is a &ldquo;how to install this on your phone&rdquo; card &mdash; before anyone knows what the app does or why they'd want it. The hero (&ldquo;Plan your next European away day&rdquo;) is the real pitch and should come first. The install prompt is great, but it should appear <b>after</b> someone has had a win (e.g. after their first search), not as the opening move.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>On the Search page, move the "Install Groundhopr on your phone" card so it is
+NOT the first thing above the hero. Show the hero + search first. Only surface
+the install prompt lower down, or after the user has completed their first
+search, and keep it dismissible (it already is).</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Navigation</span>
+          <h3>Everything hides behind one hamburger menu</h3></div>
+        <p>There's no bottom tab bar and no persistent navigation &mdash; all 9+ sections live inside a single hamburger dropdown. For a mobile app, a bottom nav with the 3&ndash;4 most important destinations (Search, Fixtures, Map/Profile) would make the app feel far more app-like and make features discoverable. Right now the map, badges and community are buried inside Profile, several taps deep. A couple of screens (the Partners page) can't be reached at all.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Add a persistent bottom tab bar to public/app.jsx for mobile with 3-4 primary
+destinations (Search, Fixtures, Map/Profile, and the trip planner). Keep it
+fixed at the bottom with the current lime/black styling and safe-area padding,
+highlight the active tab, and surface the Map, Badges and Community so they are
+reachable in one tap instead of being buried inside Profile. Either add the
+orphaned Partners page to the navigation or remove it.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Onboarding</span>
+          <h3>No first-run guidance, and the payoff is hidden behind login</h3></div>
+        <p>A first-time visitor gets no orientation &mdash; no &ldquo;here's what you can do&rdquo;. And the most delightful features (Plan My Trip, the map, the ticket keepsake, community) are all Pro-and-login-gated, so a brand-new user can't experience the magic before being asked to sign up or pay. Consider letting people <b>feel one great moment for free</b> (e.g. one AI trip plan, or adding one ground to the map) before the gate. That's the single biggest lever on sign-ups.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Let logged-out users feel one "win" before any gate in public/app.jsx. Pick the
+single highest-value free moment -- e.g. let a new visitor generate ONE AI trip
+plan, or add ONE ground to their map -- and only prompt sign-up / Pro after
+they've experienced it (or on the second use). Add a short, skippable first-run
+intro (2-3 lines or cards) that says what Groundhopr does. Keep Search, Fixtures,
+Blog and that first taste open to everyone.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Mobile &middot; dead end</span>
+          <h3>A Pro feature says &ldquo;mobile download coming soon&rdquo;</h3></div>
+        <p>The Matchday Memory ticket keepsake &mdash; a lovely, shareable, viral-friendly feature &mdash; can only be downloaded on desktop; on mobile it shows &ldquo;coming soon&rdquo;. Since the app is mobile-first and the whole point is sharing, this is exactly backwards. Fixing mobile image export here would turn a dead end into your best organic-growth loop. (There's already a share-card image generator in the code that isn't wired to any button &mdash; some of this machinery exists.)</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Make the Matchday Memory ticket keepsake work on mobile in public/app.jsx, not
+just desktop. Replace the "mobile download coming soon" message with a working
+export using the existing html2canvas path, and use the Web Share API where
+available so users can share the image straight to social / WhatsApp. Also wire
+the existing generateShareCard image generator to a visible "Share" button on
+the profile and on a completed passport.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Consistency &middot; polish</span>
+          <h3>Small polish issues that add up</h3></div>
+        <ul class="checks bad" style="margin-top:2px;">
+          <li>The cookie banner overlaps the search controls and its buttons can be fiddly to tap &mdash; give it a solid backdrop and clear space.</li>
+          <li>The &ldquo;Helpful&rdquo; vote button reads the same whether or not you've voted &mdash; no visible &ldquo;you voted&rdquo; state.</li>
+          <li>Inconsistent capitalisation (&ldquo;community&rdquo; lowercase vs Title Case elsewhere).</li>
+          <li>Dates like &ldquo;Updated May 2026&rdquo; and fixtures are hard-coded, so they'll silently go stale.</li>
+          <li>~140 of the 150 clubs fall back to generic text (&ldquo;check the club website&rdquo;, &ldquo;ask locals for the fan pub&rdquo;) &mdash; fine as a stopgap, but it undercuts the &ldquo;local tips&rdquo; promise for most searches.</li>
+          <li>Two whole systems (Friends and Bucket List) are fully built but commented out &mdash; decide to finish or delete them; dead features rot.</li>
+        </ul>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Fix a batch of small polish issues in public/app.jsx: (1) give the cookie banner
+a solid backdrop and enough spacing so it doesn't overlap the search controls,
+and make its buttons easy to tap; (2) give the "Helpful" vote button a clear
+voted / not-voted state (filled icon + label change) instead of looking
+identical; (3) make capitalisation consistent (e.g. "Community", not
+"community"); (4) replace hard-coded dates like "Updated May 2026" with dynamic
+values; (5) either finish or delete the commented-out Friends and Bucket List
+systems and the unused old map code. Keep behaviour otherwise identical.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout"><b>The designer's bottom line:</b> the product has taste and a real point of view &mdash; the map, the passport, the ticket keepsake and the fan voice are the kind of details people share. The gap isn't imagination, it's <b>finish</b>: let people taste the good stuff before the gate, make the best feature work on the phone, and add a bottom nav so none of it stays buried.</div>
+  </section>
+
+  <!-- WIZARD -->
+  <style>
+    .wz-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 4px 0 26px; max-width: var(--read); }
+    @media (max-width: 640px) { .wz-cmp { grid-template-columns: 1fr; } }
+    .wz-col { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: var(--panel); }
+    .wz-col.now { border-top: 3px solid var(--crit); }
+    .wz-col.new { border-top: 3px solid var(--good); }
+    .wz-col h4 { margin: 0 0 12px; font-size: 12px; letter-spacing: .07em; text-transform: uppercase; }
+    .wz-col.now h4 { color: var(--crit); } .wz-col.new h4 { color: var(--good); }
+    .wz-col ul { margin: 0; padding: 0; list-style: none; }
+    .wz-col li { font-size: 14px; color: var(--ink-soft); padding: 7px 0 7px 22px; position: relative; border-top: 1px solid var(--line); }
+    .wz-col li:first-child { border-top: none; }
+    .wz-col li::before { position: absolute; left: 0; top: 7px; font-weight: 800; }
+    .wz-col.now li::before { content: "\2715"; color: var(--crit); }
+    .wz-col.new li::before { content: "\2713"; color: var(--good); }
+
+    .play { display: grid; gap: 12px; max-width: var(--read); margin: 8px 0 26px; }
+    .play-item { display: grid; grid-template-columns: 34px 1fr; gap: 14px; background: var(--panel);
+      border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow); }
+    .play-num { font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--accent-ink);
+      background: var(--accent); border-radius: 8px; width: 34px; height: 34px; display: flex;
+      align-items: center; justify-content: center; }
+    .play-item h4 { margin: 2px 0 5px; font-size: 15.5px; }
+    .play-item p { margin: 0; font-size: 14px; color: var(--ink-soft); }
+    .play-item p .why { color: var(--green-deep); font-weight: 600; }
+
+    /* ---- Interactive prototype ---- */
+    .wz-demo { display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 10px 0 30px; }
+    .wz-frame-label { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--muted);
+      display: flex; align-items: center; gap: 9px; }
+    .wz-frame-label .lv { width: 8px; height: 8px; border-radius: 50%; background: var(--good); box-shadow: 0 0 0 3px color-mix(in srgb, var(--good) 22%, transparent); }
+    .wz-phone { width: 100%; max-width: 392px; background: var(--panel); border: 1px solid var(--line-strong);
+      border-radius: 30px; box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; min-height: 588px; }
+    .wz-top { padding: 22px 22px 18px; background: var(--panel-2); border-bottom: 1px solid var(--line); }
+    .wz-crumb { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 700; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 10px; font-variant-numeric: tabular-nums; }
+    .wz-bar { height: 6px; border-radius: 6px; background: color-mix(in srgb, var(--muted) 20%, transparent); overflow: hidden; }
+    .wz-fill { height: 100%; background: var(--accent); border-radius: 6px; width: 6%; transition: width .4s cubic-bezier(.4,0,.2,1); }
+    .wz-title { font-size: 23px; font-weight: 800; letter-spacing: -.015em; margin: 17px 0 3px; color: var(--ink); }
+    .wz-sub { font-size: 13.5px; color: var(--muted); }
+    .wz-body { padding: 18px 22px; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .wz-opt { text-align: left; background: var(--panel); border: 1.5px solid var(--line-strong); border-radius: 13px;
+      padding: 14px 15px; cursor: pointer; transition: border-color .15s, background .15s; font-family: inherit; position: relative; width: 100%; }
+    .wz-opt:hover { border-color: var(--accent); }
+    .wz-opt .oh { display: block; font-size: 15px; font-weight: 700; color: var(--ink); padding-right: 22px; }
+    .wz-opt .od { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+    .wz-opt.sel { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 13%, transparent); }
+    .wz-opt.sel::after { content: "\2713"; position: absolute; top: 13px; right: 14px; font-weight: 800; color: var(--green-deep); }
+    .wz-opt.cta .oh { color: var(--green-deep); }
+    .wz-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: 3px; }
+    .wz-invrow { display: flex; gap: 8px; }
+    .wz-input { flex: 1; border: 1.5px solid var(--line-strong); border-radius: 11px; padding: 12px 14px;
+      font-family: inherit; font-size: 14px; background: var(--panel); color: var(--ink); }
+    .wz-input:focus { outline: none; border-color: var(--accent); }
+    .wz-addbtn { background: var(--ink); color: var(--panel); border: none; border-radius: 11px; padding: 0 18px;
+      font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+    .wz-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .wz-chip { display: inline-flex; align-items: center; gap: 7px; background: color-mix(in srgb, var(--accent) 15%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 100px; padding: 6px 8px 6px 13px; font-size: 13px; color: var(--ink); }
+    .wz-chip button { border: none; background: transparent; color: var(--muted); cursor: pointer; font-size: 15px; line-height: 1; padding: 0 2px; }
+    .wz-foot { display: flex; align-items: center; gap: 10px; padding: 14px 20px 18px; border-top: 1px solid var(--line); background: var(--panel-2); }
+    .wz-foot button { font-family: inherit; font-weight: 700; font-size: 14px; border-radius: 11px; cursor: pointer; padding: 12px 16px; border: 1.5px solid var(--line-strong); background: transparent; color: var(--ink-soft); }
+    .wz-skip { margin-left: auto; border-color: transparent; color: var(--muted); }
+    .wz-next { background: var(--accent) !important; color: #1a1a1a !important; border: none !important; padding: 12px 26px !important; }
+    .wz-next:hover { filter: brightness(.95); }
+    .wz-back:disabled { opacity: .3; cursor: default; }
+    /* done screen */
+    .wz-done { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 6px; }
+    .wz-stamp { width: 66px; height: 66px; border-radius: 50%; background: var(--accent); display: flex; align-items: center;
+      justify-content: center; font-size: 32px; margin-bottom: 6px; animation: wzpop .5s cubic-bezier(.2,.8,.2,1.2); }
+    @keyframes wzpop { 0% { transform: scale(.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+    .wz-doneh { font-size: 19px; font-weight: 800; color: var(--ink); }
+    .wz-donesub { font-size: 13.5px; color: var(--muted); margin-bottom: 8px; }
+    .wz-revwrap { width: 100%; text-align: left; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 12px; }
+    .wz-rev { display: flex; gap: 10px; align-items: center; font-size: 13.5px; padding: 9px 14px; border-top: 1px solid var(--line); color: var(--muted); }
+    .wz-rev:first-child { border-top: none; }
+    .wz-rev.ok { color: var(--ink-soft); }
+    .wz-rev .rk { font-weight: 800; color: var(--muted); width: 14px; }
+    .wz-rev.ok .rk { color: var(--green-deep); }
+    .wz-share { width: 100%; background: var(--accent); color: #1a1a1a; border: none; border-radius: 12px; padding: 13px;
+      font-family: inherit; font-weight: 800; font-size: 14.5px; cursor: pointer; }
+    .wz-mapbtn { width: 100%; background: transparent; color: var(--ink-soft); border: 1.5px solid var(--line-strong);
+      border-radius: 12px; padding: 12px; font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 8px; }
+  </style>
+  <style>
+    /* Prototypes render in the REAL app palette + fonts (always light, like the live app),
+       so they read as faithful mockups regardless of this report's own theme. */
+    .wz-phone {
+      --panel: #ffffff;
+      --panel-2: #f6f7f4;
+      --ink: #1a1a1a;
+      --ink-soft: #33393a;
+      --muted: #7a8a7e;
+      --line: #e8ebe6;
+      --line-strong: #dfe3db;
+      --accent: #a4d233;
+      --green: #1a1a1a;
+      --green-deep: #1a1a1a;
+      --good: #1a1a1a;
+      --good-bg: #eef6d6;
+      --shadow: 0 1px 2px rgba(26,26,26,.05), 0 10px 30px rgba(26,26,26,.10);
+      color: #1a1a1a;
+      background: #ffffff;
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    }
+    .wz-phone .wz-title,
+    .wz-phone .wz-doneh,
+    .wz-phone .td-lab,
+    .wz-phone .ma-what,
+    .wz-phone .rm-stat .n { font-family: 'Sora', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    .wz-phone .wz-next { background: #a4d233 !important; color: #1a1a1a !important; }
+    .wz-phone .wz-opt.cta .oh { color: #1a1a1a; }
+  </style>
+  <section id="wizard">
+    <div class="sec-head"><span class="idx">05</span><h2>Rebuild the trip flow as a wizard</h2></div>
+    <div class="pass later">&#9679; The flagship rework &mdash; the biggest single win, once the leaks are fixed</div>
+    <p class="sec-note">This is the change most likely to move the numbers &mdash; completions, affiliate clicks, and shares. Right now the whole trip is one long page of collapsed sections. Turning it into a guided, one-thing-at-a-time flow (the same idea behind the best app onboarding) fits this product unusually well, because a trip <i>is</i> a sequence. Below: why the current version underperforms, a working demo you can click through, the exact playbook, and prompts to build it.</p>
+
+    <h3 style="font-size:18px;margin:26px 0 12px;">Why the one-page version quietly underperforms</h3>
+    <div class="wz-cmp">
+      <div class="wz-col now">
+        <h4>Now &middot; one page, 7 accordions</h4>
+        <ul>
+          <li>Steps sit collapsed, so most people expand one or two &mdash; the hotel, activities and pre-match links (your revenue) are never even seen.</li>
+          <li>&ldquo;0/7 done&rdquo; just sits there. Nothing pulls the user forward.</li>
+          <li>Everything visible at once = choice overload; people skim and bounce.</li>
+          <li>The passport almost never gets completed, so the shareable payoff (and your growth loop) rarely fires.</li>
+          <li>Every affiliate link competes for the same glance instead of getting its own moment.</li>
+        </ul>
+      </div>
+      <div class="wz-col new">
+        <h4>Wizard &middot; one decision per screen</h4>
+        <ul>
+          <li>Each step is unmissable and full-screen, so every affiliate action becomes the hero of its own screen &mdash; far higher click-through.</li>
+          <li>A visible progress bar creates real momentum to finish (the &ldquo;nearly there&rdquo; pull).</li>
+          <li>One choice at a time = low effort, high completion.</li>
+          <li>Finishing triggers a celebratory &ldquo;passport stamped&rdquo; moment &mdash; the natural cue to share.</li>
+          <li>Each partner gets a clean, dedicated pitch at exactly the right time.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;margin:26px 0 12px;">Stage 1 &mdash; Plan (the wizard)</h3>
+    <p class="sec-note" style="margin-bottom:14px;">This is a real, clickable prototype (not a screenshot). Tap <b>Continue / Back / Skip</b>, choose options, add a mate, and reach the finish. It uses an Ajax away day as the example. It's a sketch of the <i>flow and feel</i>, not the final design.</p>
+    <div class="wz-demo">
+      <div class="wz-frame-label"><span class="lv"></span> Interactive prototype</div>
+      <div class="wz-phone" role="group" aria-label="Trip planner wizard prototype">
+        <div class="wz-top">
+          <div class="wz-crumb"><span id="wz-step">Step 1 of 7</span><span id="wz-pct">0% planned</span></div>
+          <div class="wz-bar"><div class="wz-fill" id="wz-fill"></div></div>
+          <div class="wz-title" id="wz-title">Pick your fixture</div>
+          <div class="wz-sub" id="wz-sub">Ajax &middot; Johan Cruyff Arena &middot; Amsterdam</div>
+        </div>
+        <div class="wz-body" id="wz-body"></div>
+        <div class="wz-foot">
+          <button class="wz-back" id="wz-back" type="button">Back</button>
+          <button class="wz-skip" id="wz-skip" type="button">Skip</button>
+          <button class="wz-next" id="wz-next" type="button">Continue</button>
+        </div>
+      </div>
+      <div class="wz-frame-label" style="text-transform:none;letter-spacing:0;font-weight:500;">&#8593; Tap through it</div>
+    </div>
+
+    <h3 style="font-size:18px;margin:26px 0 12px;">The playbook &mdash; and why each part beats what's there now</h3>
+    <div class="play">
+      <div class="play-item"><div class="play-num">1</div><div><h4>One decision per screen</h4><p>Show a single choice or action at a time. <span class="why">Why better:</span> cuts the choice-overload of the current 7-section page, and each affiliate CTA gets a full screen to itself instead of hiding inside a collapsed row.</p></div></div>
+      <div class="play-item"><div class="play-num">2</div><div><h4>An always-visible progress bar (&ldquo;Step 3 of 7&rdquo;)</h4><p>Keep progress on screen at every step. <span class="why">Why better:</span> a visible, unfinished bar creates a genuine pull to complete it &mdash; the static &ldquo;0/7 done&rdquo; badge today does the opposite (it looks like a chore).</p></div></div>
+      <div class="play-item"><div class="play-num">3</div><div><h4>Front-load a real win</h4><p>On the first step or two, show an actual flight price or hotel option, not just a link. <span class="why">Why better:</span> people feel value before you ask anything of them, so they commit to the rest of the flow.</p></div></div>
+      <div class="play-item"><div class="play-num">4</div><div><h4>Pre-fill everything you already know</h4><p>You already resolve club &rarr; stadium &rarr; city &rarr; dates &rarr; fixtures. Carry that into every step so each one is &ldquo;confirm&rdquo;, not &ldquo;fill in&rdquo;. <span class="why">Why better:</span> removes typing and friction, which is the number-one reason people abandon multi-step flows.</p></div></div>
+      <div class="play-item"><div class="play-num">5</div><div><h4>Skippable, never hard-gated</h4><p>Every step has a quiet &ldquo;Skip for now&rdquo;. <span class="why">Why better:</span> forcing people through a fixed order kills momentum; letting them skip keeps them moving, and a skipped (un-ticked) step gently invites them back.</p></div></div>
+      <div class="play-item"><div class="play-num">6</div><div><h4>Save and resume</h4><p>Persist the current step and choices to the passport row. <span class="why">Why better:</span> a trip gets planned over days, not minutes &mdash; people leave and come back. Your <code>pitch_passports</code> table already supports this; it's mostly a UI change.</p></div></div>
+      <div class="play-item"><div class="play-num">7</div><div><h4>A real completion moment</h4><p>When they finish, stamp the passport with a little celebration, then immediately offer &ldquo;Share&rdquo; and &ldquo;Add to your grounds map&rdquo;. <span class="why">Why better:</span> this is the trigger for your organic growth loop &mdash; today, because completion is rare, that moment almost never happens.</p></div></div>
+      <div class="play-item"><div class="play-num">8</div><div><h4>End on a one-page review</h4><p>Keep today's single-page layout &mdash; but as the <i>final</i> summary/booking screen. <span class="why">Why better:</span> the current design is actually great for reviewing everything at a glance; it's just wrong as the <i>building</i> experience. Wizard to build, one page to review and book.</p></div></div>
+    </div>
+
+    <div class="callout"><b>The net effect:</b> you're not adding features &mdash; you're re-sequencing the ones you already have so people actually reach them. Same data, same affiliate links, same passport table. The wizard just makes completion the path of least resistance, which lifts both conversion (more affiliate clicks seen) and growth (more finished passports shared).</div>
+
+    <h3 style="font-size:18px;margin:30px 0 12px;">Booking vs planning: don't send them away mid-flow</h3>
+    <p class="sec-note" style="margin-bottom:16px;">The right question to ask before building this: every step ends at a third party (flights on Kiwi, a hotel on Booking, tickets at the club). Forcing someone to actually book each one before they can continue would wreck the flow &mdash; that's up to seven separate sites in one sitting, and every jump out is a chance to lose them. The fix is the principle behind every good trip-planning tool: <b>separate deciding from booking.</b></p>
+    <div class="wz-cmp">
+      <div class="wz-col now"><h4>Book as you go (forced)</h4><ul>
+        <li>User must leave to a third-party site at every step just to continue.</li>
+        <li>Each jump risks abandonment; seven sites in a row is exhausting.</li>
+        <li>The plan rarely gets finished, so nothing is saved or shared.</li>
+      </ul></div>
+      <div class="wz-col new"><h4>Decide now, book from the summary</h4><ul>
+        <li>The wizard only collects <i>decisions</i> &mdash; fast, no booking needed to advance.</li>
+        <li>Every booking link opens in a new tab, so the wizard is never lost and progress is saved.</li>
+        <li>A final &ldquo;Your away day&rdquo; summary is the one place to book it all &mdash; in a batch, or over days.</li>
+      </ul></div>
+    </div>
+    <div class="callout"><b>Recommendation:</b> let people build the whole plan in one quick pass (deciding is easy and keeps momentum), then book from a single summary screen at their own pace. It matches how people actually plan a trip &mdash; decide now, book over the week &mdash; keeps the flow intact, and you still get every affiliate click; arguably more, because they're gathered in one place the user comes back to. Let keen users book inline (in a new tab) if they want, but never <i>require</i> it to move forward.</div>
+
+    <div class="finding good" style="margin-top:22px;">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev good">Build step 1</span><span class="tag">The wizard shell</span>
+          <h3>Turn the accordion into a guided flow</h3></div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Rebuild the Pitch Passport in public/app.jsx as a step-by-step wizard instead
+of a single page of collapsible accordions. Show ONE step per screen in this
+order: (1) Pick your fixture, (2) Getting there, (3) Where to stay, (4) Match
+ticket, (5) Things to do, (6) Pre-match, (7) Bring your mates. Requirements:
+- A progress bar and "Step X of 7" pinned to the top on every step.
+- Back / Skip / Continue controls at the bottom; Back disabled on step 1.
+- Pre-fill each step from the already-resolved club, stadium, city, dates and
+  fixtures -- the user confirms, not re-enters.
+- Pre-select a sensible default option on every step so the user is never faced
+  with an empty choice (reduces decision fatigue); they can change it.
+- Advancing must NEVER require leaving the site: booking/affiliate links open in
+  a new tab (target="_blank" rel="noopener") and never block progress.
+- Reuse the EXISTING affiliate links and data exactly as they are now; do not
+  change any URLs or the club/trip data. Only change the presentation and flow.
+- UI: a fixed top zone holds the progress bar, "Step X of 7" and the step
+  title/subtitle; the body is full-width tappable option cards (rounded ~13px,
+  1.5px border, tinted lime with a check mark when selected); a bottom bar has
+  Back (left), a right-aligned "Skip", and a lime "Continue" button.
+- Keep the lime/black styling and the existing components where possible.
+Do not touch the Supabase schema in this step.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding good">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev good">Build step 2</span><span class="tag">Save / resume + completion</span>
+          <h3>Make it resumable and give it a payoff</h3></div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Extend the Pitch Passport wizard in public/app.jsx: (1) Persist the current
+step index and the user's selections to their pitch_passports row in Supabase
+as they go, and restore them when they return, so a trip can be planned across
+multiple sessions. (2) Add a final "Passport stamped" completion screen that is a
+brief celebration and then HANDS THE USER OFF to the trip dashboard (build step 3)
+to start booking -- do NOT dead-end on sharing. Keep the shareable passport
+(share_token + generateShareCard image, working on mobile), but surface it from
+the dashboard once the trip is booked, not here. Keep it all client-side except
+the Supabase reads/writes, which must respect the RLS policies.</pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;margin:32px 0 12px;">After &ldquo;planned&rdquo;: the trip needs a home</h3>
+    <p class="sec-note" style="margin-bottom:14px;">You've spotted the real gap: &ldquo;planned&rdquo; isn't the finish line. A trip has a life of its own after the wizard &mdash; things get booked over days, then you travel, then it becomes a memory. So yes, this is a distinct part of the app worth designing: a place the trip <i>lives</i>. Think of it as four stages, each with its own screen and its own job.</p>
+    <div class="play">
+      <div class="play-item"><div class="play-num">1</div><div><h4>Plan</h4><p>The wizard. Decide the shape of the away day. <span class="why">Output:</span> a saved passport.</p></div></div>
+      <div class="play-item"><div class="play-num">2</div><div><h4>Book &amp; track</h4><p>The trip dashboard (new). Book each part at your own pace and watch what's done vs still to do. <span class="why">This is the missing screen.</span></p></div></div>
+      <div class="play-item"><div class="play-num">3</div><div><h4>Attend</h4><p>Matchday. A lightweight &ldquo;today&rdquo; view &mdash; tickets, kickoff, the pre-match spot, your group. <span class="why">Later, not day one.</span></p></div></div>
+      <div class="play-item"><div class="play-num">4</div><div><h4>Remember</h4><p>The trip becomes a pin on your grounds map and a shareable keepsake ticket. <span class="why">Closes the loop back to the map.</span></p></div></div>
+    </div>
+    <div class="callout"><b>Where the share prompt belongs:</b> two moments, not one &mdash; when the trip is <b>fully booked</b> (&ldquo;off to Amsterdam!&rdquo; bragging rights) and <b>after the visit</b> (the keepsake). Prompting someone to share an empty, unbooked plan is premature. That's exactly why the wizard now hands off to <i>booking</i>, and Share/Add-to-map only appear once the trip is booked.</div>
+
+    <h3 style="font-size:18px;margin:30px 0 12px;">Stage 2 &mdash; Book &amp; track (the dashboard)</h3>
+    <p class="sec-note" style="margin-bottom:14px;">How an experienced Apple-school designer would frame it: the finished plan becomes a <b>living object</b> &mdash; one screen that answers &ldquo;what's booked, what's left, and what do I do next?&rdquo; at a glance. A countdown so it feels real; a simple booked/remaining progress bar; one tap to book each part (opening the partner in a new tab); the ability to tick things off; and Share / Add-to-map surfacing only once it's booked. It's the natural home under a &ldquo;My Trips&rdquo; tab. Here's a working mock &mdash; tap <b>Book</b> on each row and watch it fill up.</p>
+
+    <style>
+      .td-row { display: flex; align-items: center; gap: 12px; padding: 13px 2px; border-top: 1px solid var(--line); }
+      .td-row:first-child { border-top: none; }
+      .td-ic { width: 36px; height: 36px; border-radius: 10px; background: var(--panel-2); border: 1px solid var(--line);
+        display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+      .td-meta { flex: 1; min-width: 0; }
+      .td-lab { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+      .td-det { font-size: 12px; color: var(--muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .td-book { background: var(--accent); color: #1a1a1a; border: none; border-radius: 9px; padding: 9px 15px;
+        font-family: inherit; font-weight: 700; font-size: 12.5px; cursor: pointer; white-space: nowrap; }
+      .td-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 7px 12px; border-radius: 100px; white-space: nowrap; }
+      .td-pill.booked { background: var(--good-bg); color: var(--good); cursor: pointer; }
+      .td-pill.saved { background: var(--panel-2); color: var(--muted); border: 1px solid var(--line); }
+      .td-ghost { background: transparent; border: 1.5px solid var(--line-strong); color: var(--ink-soft); border-radius: 9px;
+        padding: 8px 13px; font-family: inherit; font-weight: 600; font-size: 12px; cursor: pointer; }
+      .td-banner { background: color-mix(in srgb, var(--accent) 16%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+        border-radius: 12px; padding: 12px 14px; font-size: 13.5px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 8px; }
+      .td-chip { font-size: 11.5px; font-weight: 700; color: var(--green-deep); background: color-mix(in srgb, var(--accent) 14%, transparent); padding: 4px 10px; border-radius: 100px; }
+    </style>
+    <div id="td-proto" class="wz-demo">
+      <div class="wz-frame-label"><span class="lv"></span> Interactive prototype &middot; trip dashboard</div>
+      <div class="wz-phone" role="group" aria-label="Trip dashboard prototype">
+        <div class="wz-top">
+          <div class="wz-crumb"><span>My trips &middot; Ajax</span><span class="td-chip">⏱ in 34 days</span></div>
+          <div class="wz-title" style="font-size:21px;">Ajax away day</div>
+          <div class="wz-sub">Johan Cruyff Arena &middot; Amsterdam &middot; Sat 22 Mar</div>
+          <div style="margin-top:15px;">
+            <div class="wz-crumb"><span id="td-progtext">1 of 4 booked</span><span id="td-progpct">25%</span></div>
+            <div class="wz-bar"><div class="wz-fill" id="td-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+        <div class="wz-body" id="td-body"></div>
+        <div class="wz-foot" id="td-foot"></div>
+      </div>
+      <div class="wz-frame-label" style="text-transform:none;letter-spacing:0;font-weight:500;">&#8593; Tap &ldquo;Book&rdquo; on each row &mdash; Share unlocks once it's all booked</div>
+    </div>
+
+    <div class="finding good">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev good">Build step 3</span><span class="tag">The trip dashboard</span>
+          <h3>Build the trip dashboard (book &amp; track)</h3></div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Turn a saved passport into a "trip dashboard" -- the home for a planned trip,
+listed under a "My Trips" tab in public/app.jsx. Show: a trip header with a
+countdown to kickoff; a "X of N booked" progress bar; and one row per component
+(flights, hotel, ticket, things to do, pre-match, group). Each bookable row has a
+"Book" button that opens the EXISTING affiliate link in a new tab
+(target="_blank" rel="noopener") and lets the user mark it booked; show clear
+"booked" vs "to book" states and highlight the next unbooked action. Only reveal
+"Share your passport" (share_token + generateShareCard) and "Add to your grounds
+map" once every bookable item is booked.
+UI: match the existing card radius, COLORS tokens and DM Sans / Sora fonts. Each
+row is a 36px rounded icon tile on the left, label + one-line detail in the
+middle, and a lime "Book" button or a green "Booked" pill on the right; a slim
+progress bar and a countdown chip sit in the header; the footer shows the next
+unbooked action. Persist booked status on the
+pitch_passports row. This screen is where the wizard's completion hands off to.</pre>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      /* Matchday */
+      .ma-tl { position: relative; padding-left: 26px; margin-bottom: 14px; }
+      .ma-ev { position: relative; padding: 0 0 18px; }
+      .ma-ev:last-child { padding-bottom: 0; }
+      .ma-line { position: absolute; left: -20px; top: 15px; bottom: -3px; width: 2px; background: var(--line); }
+      .ma-ev:last-child .ma-line { display: none; }
+      .ma-dot { position: absolute; left: -26px; top: 3px; width: 13px; height: 13px; border-radius: 50%; background: var(--line-strong); border: 2px solid var(--panel); }
+      .ma-ev.now .ma-dot { background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
+      .ma-ev.ko .ma-dot { background: var(--green); }
+      .ma-time { font-size: 12px; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+      .ma-what { font-size: 14.5px; font-weight: 700; color: var(--ink); margin-top: 1px; }
+      .ma-ev.now .ma-what { color: var(--green-deep); }
+      .ma-ev.ko .ma-what { font-size: 16.5px; }
+      .ma-sub { font-size: 12px; color: var(--muted); }
+      .ma-actions { display: flex; gap: 8px; }
+      .ma-act { flex: 1; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px 6px; text-align: center; cursor: pointer; font-family: inherit; }
+      .ma-act:hover { border-color: var(--accent); }
+      .ma-act .ai { font-size: 19px; }
+      .ma-act .al { font-size: 11px; font-weight: 700; color: var(--ink-soft); margin-top: 4px; }
+      .ma-ticket { margin-top: 12px; background: linear-gradient(160deg, #1a1a1a, #2d3a2e); color: #fff; border-radius: 14px; padding: 18px; text-align: center; }
+      .ma-qr { width: 104px; height: 104px; margin: 12px auto; border-radius: 10px; background: #fff; background-image: repeating-conic-gradient(#1a1a1a 0 25%, #fff 0 50%); background-size: 16px 16px; }
+      /* Remember */
+      .rm-seg { display: flex; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 4px; gap: 4px; margin-bottom: 14px; }
+      .rm-seg button { flex: 1; border: none; background: transparent; font-family: inherit; font-weight: 700; font-size: 13px; color: var(--muted); padding: 9px; border-radius: 9px; cursor: pointer; }
+      .rm-seg button.on { background: var(--panel); color: var(--ink); box-shadow: var(--shadow); }
+      .rm-stats { display: flex; gap: 8px; margin-bottom: 12px; }
+      .rm-stat { flex: 1; background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 13px 8px; text-align: center; }
+      .rm-stat .n { font-size: 24px; font-weight: 800; color: var(--ink); }
+      .rm-stat .l { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-top: 3px; }
+      .rm-map { position: relative; height: 182px; border-radius: 14px; border: 1px solid var(--line); overflow: hidden; background: var(--panel-2);
+        background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 26px 26px; margin-bottom: 10px; }
+      .rm-pin { position: absolute; width: 12px; height: 12px; background: var(--muted); border-radius: 50% 50% 50% 0; transform: translate(-50%, -50%) rotate(-45deg); }
+      .rm-pin.new { background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent); width: 15px; height: 15px; }
+      .rm-cap { font-size: 12.5px; color: var(--muted); text-align: center; }
+      .rm-ticket { position: relative; overflow: hidden; background: linear-gradient(160deg, #1a1a1a, #2d3a2e); color: #fff; border-radius: 16px; padding: 22px 18px 18px; }
+      .rm-ticket .kt-bar { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent); }
+      .rm-stars { font-size: 26px; letter-spacing: 4px; color: #f0b429; cursor: pointer; margin: 12px 0 6px; user-select: none; }
+    </style>
+
+    <h3 style="font-size:18px;margin:32px 0 12px;">Stage 3 &mdash; Attend (matchday)</h3>
+    <p class="sec-note" style="margin-bottom:14px;">On the day, the trip flips into a glanceable &ldquo;today&rdquo; view: a countdown to kickoff, the day laid out on a timeline, and one-tap access to the ticket, directions and weather. Think Apple Wallet meets a day planner &mdash; big, calm, time-ordered. (This is a &ldquo;later, not day one&rdquo; screen, but here's the shape.)</p>
+    <div id="ma-proto" class="wz-demo">
+      <div class="wz-frame-label"><span class="lv"></span> Interactive prototype &middot; matchday</div>
+      <div class="wz-phone" role="group" aria-label="Matchday prototype">
+        <div class="wz-top">
+          <div class="wz-crumb"><span>Today &middot; Sat 22 Mar</span><span class="td-chip" id="ma-count">⏱ kicks off in 3h 12m</span></div>
+          <div class="wz-title" style="font-size:22px;">⚽ Matchday</div>
+          <div class="wz-sub">Ajax vs PSV &middot; Johan Cruyff Arena</div>
+        </div>
+        <div class="wz-body">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">Your day</div>
+          <div class="ma-tl" id="ma-tl"></div>
+          <div class="ma-actions" id="ma-actions"></div>
+          <div id="ma-ticket"></div>
+        </div>
+      </div>
+      <div class="wz-frame-label" style="text-transform:none;letter-spacing:0;font-weight:500;">&#8593; Tap &ldquo;Ticket&rdquo; to show your entry pass</div>
+    </div>
+
+    <div class="finding good">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev good">Build step 4</span><span class="tag">Attend / matchday</span>
+          <h3>Build the matchday view</h3></div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Build a "Matchday" view in public/app.jsx -- a glanceable day-of screen for a
+trip whose match is today (or within ~24h), reachable from the trip dashboard and
+shown automatically on matchday. Match the app's design system exactly: the
+COLORS tokens, BTN styles, DM Sans body / Sora headings, and the existing card
+radius and spacing.
+LAYOUT, top to bottom:
+1) Header: "Matchday" in Sora 800; subtitle "Ajax vs PSV - Johan Cruyff Arena";
+   a lime countdown chip "kicks off in 3h 12m" that recalculates live from
+   kickoff time. Before the day, show a "N days to go" variant; at kickoff show
+   "Kickoff!".
+2) "YOUR DAY" (uppercase label) then a vertical timeline: one row per event with
+   a left time in tabular numerals, a bold title + grey subtitle, and a dot
+   marker on a connecting vertical line. Events are derived from the booked
+   passport: flight arrival, hotel check-in, pre-match bar, walk to ground,
+   kickoff. Highlight the current/next event (lime dot with a soft glow ring,
+   green-tinted title) and render kickoff as the emphasised final row.
+3) Quick-actions row of 3 equal rounded cards: Ticket, Directions, Weather (icon
+   over a small label).
+4) Tapping "Ticket" expands a dark ticket card (near-black gradient) showing
+   "Ajax vs PSV - 16:30", a QR placeholder, and "Gate C - Block 410 - Row 12"
+   with "Show this at the turnstile". "Directions" opens a maps link in a new tab.
+DATA: read the trip from the pitch_passports row. Keep everything client-side.</pre>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:18px;margin:32px 0 12px;">Stage 4 &mdash; Remember (map + keepsake)</h3>
+    <p class="sec-note" style="margin-bottom:14px;">After the final whistle the trip becomes a memory: log the ground (a rating, the score, a note), it drops a pin on your grounds map, and it mints a shareable keepsake ticket. This is the loop back to the map that started the whole app &mdash; and the second natural moment to share.</p>
+    <div id="rm-proto" class="wz-demo">
+      <div class="wz-frame-label"><span class="lv"></span> Interactive prototype &middot; remember</div>
+      <div class="wz-phone" role="group" aria-label="Remember prototype">
+        <div class="wz-top">
+          <div class="wz-crumb"><span>Your grounds</span><span class="td-chip">Ground #12 unlocked</span></div>
+          <div class="wz-title" style="font-size:21px;">Amsterdam, done ✓</div>
+          <div class="wz-sub">Johan Cruyff Arena &middot; 22 Mar &middot; Ajax 2&ndash;1 PSV</div>
+        </div>
+        <div class="wz-body">
+          <div class="rm-seg"><button class="on" data-v="map" type="button">Map</button><button data-v="keep" type="button">Keepsake</button></div>
+          <div id="rm-view"></div>
+        </div>
+      </div>
+      <div class="wz-frame-label" style="text-transform:none;letter-spacing:0;font-weight:500;">&#8593; Switch tabs &middot; tap the stars to rate</div>
+    </div>
+
+    <div class="finding good">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev good">Build step 5</span><span class="tag">Remember / keepsake</span>
+          <h3>Build the memory &amp; keepsake experience</h3></div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>You are a senior Apple UX/UI designer. Design to Apple's principles --
+clarity, deference to content, and depth: a strong type hierarchy, generous
+whitespace, one obvious primary action per screen, restrained purposeful
+motion, and no clutter. Keep it consistent with the existing Groundhopr look
+(its COLORS, buttons and DM Sans / Sora fonts) and finish to a high polish.
+
+Build the "Remember" experience in public/app.jsx -- what a trip becomes after
+the visit. Match the existing design system (COLORS, BTN, DM Sans / Sora, card
+radius). Two connected pieces:
+A) A "log this ground" prompt that appears a day after the match: rate the ground
+   1-5 stars, optional final score, a short note, and an optional photo. Saving
+   writes to the pins row, drops/updates the pin on the grounds map, and unlocks
+   the keepsake.
+B) A "Remember" screen with a segmented control [ Map | Keepsake ]:
+   - MAP tab: a 3-up stats row (Grounds / Countries / Badges) above the existing
+     Leaflet grounds map, with the newest ground's pin highlighted/pulsing and a
+     caption naming it ("Newest: Johan Cruyff Arena, Amsterdam").
+   - KEEPSAKE tab: a ticket-stub card on a near-black gradient with a lime accent
+     bar along the top, showing "Ground #N", the stadium name (Sora 800), the
+     score line "Ajax 2-1 PSV - Sat 22 Mar", a tappable 5-star rating, and the
+     city. Below it, primary "Share keepsake" and "Download ticket" buttons that
+     reuse the existing generateShareCard code and work on mobile (Web Share API
+     where available).
+DATA: persist rating/score/note/photo on the pins row. REUSE the existing MapPage
+and share-card generator rather than rebuilding them.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACKEND -->
+  <section id="backend">
+    <div class="sec-head"><span class="idx">06</span><h2>The backend &mdash; strengthen the server layer</h2></div>
+    <p class="sec-note">Straight answer, Phil: the backend isn't <i>badly written</i> &mdash; the three Netlify functions are clean and readable. The real issue is that it's <b>thin and too trusting</b>: decisions that should live on a server (who's paid, vote counts, what the AI is allowed to do) are currently made in the browser, where anyone can change them. You don't need to rewrite anything. You need to add a small, proper server layer for the handful of things that must not be client-controlled. Here's exactly what to build.</p>
+
+    <div class="finding crit">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev crit">Critical</span><span class="tag">Entitlement &middot; money</span>
+          <h3>Build the missing payment plumbing (Stripe webhook + server-set Pro)</h3></div>
+        <p>Right now &ldquo;Pro&rdquo; is a flag the browser can set, and there's no server code that reacts to a Stripe payment &mdash; so it can be faked, and real payers may not be upgraded automatically. The fix is one new server function and one database rule.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Add real server-side payment handling to the Groundhopr Netlify project.
+(1) Create functions/stripe-webhook.js that verifies the Stripe webhook
+signature using STRIPE_WEBHOOK_SECRET, and on checkout.session.completed and
+customer.subscription.updated sets profiles.is_pro = true for the matching user,
+and on customer.subscription.deleted sets it back to false. Use a Supabase
+client created with the SUPABASE_SERVICE_ROLE_KEY env var (server-only, never in
+the browser). Store the stripe_customer_id on the profiles row so future events
+can be matched to the user. (2) In Supabase, add a trigger/policy so is_pro and
+trial_expires_at can only be changed by the service_role key, never by the
+browser. (3) Register the webhook URL in the Stripe dashboard. Show me the SQL
+and the env vars I need to set in Netlify.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding high">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev high">High</span><span class="tag">Hardening</span>
+          <h3>Validate and cap every function's input</h3></div>
+        <p>The functions currently trust whatever they're sent. Add a small guard to each: check the request shape, cap sizes, and whitelist allowed values. (The AI proxy specifics are in Section 01 &mdash; this is the same principle applied across all three functions.)</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Add input validation to all three functions in the Groundhopr /functions folder.
+For ai-trip.js: reject requests missing the shared-secret header, hard-code the
+model, cap max_tokens, ignore any client "tools" field, and validate that
+"messages" is an array under a sane length. For fixtures.js and league-fixtures.js:
+validate the team/league query params against the known allow-lists already in
+the code and reject anything else with a 400. Restrict CORS on all three from "*"
+to "https://groundhopr.com". Return clear, non-revealing error messages.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Data integrity</span>
+          <h3>Give the &ldquo;Helpful&rdquo; votes real integrity</h3></div>
+        <p>Tip votes are stored as an absolute number the browser sends, with nothing stopping someone setting any count. Move to a proper one-row-per-vote model so the total can't be forged and nobody can vote twice.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Replace the tip-voting logic. In Supabase, add a tip_votes table (tip_id,
+user_id) with a unique constraint on (tip_id, user_id) and RLS so a user can
+only insert/delete their OWN vote row. Compute a tip's vote count from that
+table (a view or a trigger-maintained column) instead of letting the client
+write fan_tips.votes directly. Update public/app.jsx so voting inserts/deletes
+the user's own row and reads the derived count.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Cost &middot; resilience</span>
+          <h3>Cache the fixtures so you don't burn the free API tier</h3></div>
+        <p>The fixtures functions call football-data.org live on every request. That free tier is rate-limited (the code already handles a &ldquo;rate limited&rdquo; response gracefully &mdash; good), but caching results means faster responses and far fewer calls, so you stay well under the limit as traffic grows.</p>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Add caching to functions/fixtures.js and functions/league-fixtures.js using
+Netlify Blobs: cache each team's / league's fixture response for ~6 hours keyed
+by the team or league, serve the cached copy when it's fresh, and only call
+football-data.org when the cache is stale or empty. Keep the existing graceful
+fallback when the API is rate-limited or down.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>How the pieces fit:</b> the browser keeps doing the fun, fast stuff (search, map, the wizard UI). A thin server layer owns only what must be trusted: <b>who has paid</b> (Stripe webhook + service-role writes), <b>what the AI may do</b> (the locked-down proxy), and <b>data that can be forged</b> (votes). Everything else stays where it is. That's a few hundred lines total &mdash; not a rewrite.
+    </div>
+  </section>
+
+  <!-- 5. FOUNDATION -->
+  <section id="foundation">
+    <div class="sec-head"><span class="idx">07</span><h2>The foundation &amp; code quality</h2></div>
+    <div class="pass later">● Bigger job &mdash; a free weekend, once the above is done</div>
+    <p class="sec-note">This is the &ldquo;how it's built&rdquo; layer. None of it is urgent, but it's the thing that will slow every future change until it's addressed &mdash; and one change unlocks most of the fixes.</p>
+
+    <div class="finding high">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev high">High</span><span class="tag">Architecture</span>
+          <h3>One 6,000-line file, transpiled in the browser</h3></div>
+        <p>The entire app &mdash; ~40 components, all the club data, every database call &mdash; lives in one file. It has no build step: the browser downloads a tool called Babel and converts all 6,000 lines to runnable code <b>every single time anyone visits</b>. That's the slow &ldquo;splash screen&rdquo; pause you may have noticed. It also means no code is minified, nothing is tested in isolation, and every edit risks breaking something unrelated. This is a totally reasonable way to ship a first app fast &mdash; it's just not something to keep building on.</p>
+        <div class="callout" style="margin:14px 0 4px;"><b>The single highest-leverage change in this whole report.</b> Adding a build step (Vite) fixes the slow load, enables minification, and makes almost every other improvement here far cheaper &mdash; splitting the file, tests, linting, safer dependencies. Do the critical fixes first, then do this.</div>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Introduce a build step without rewriting the app's logic. Set up Vite with
+@vitejs/plugin-react. Move app.jsx into src/, then split it into one file per
+component under src/components/ and move the big data tables (CLUBS, TRIP_DATA,
+etc.) into src/data/. Replace the CDN &lt;script&gt; tags in index.html with npm
+dependencies imported normally (react, react-dom, d3, leaflet, @supabase/
+supabase-js, html2canvas, jspdf). Update netlify.toml to run "npm run build"
+and publish the "dist" folder. Keep behaviour identical; just change how it's
+built and loaded. Add a package.json with pinned exact versions.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="finding med">
+      <div class="bar"></div>
+      <div class="finding-body">
+        <div class="finding-head"><span class="sev med">Medium</span><span class="tag">Safety net</span>
+          <h3>No tests, no linting, and risky dependency loading</h3></div>
+        <ul class="checks bad" style="margin-top:2px;">
+          <li><b>No linter.</b> A linter would have caught the &ldquo;Download Trip Plan&rdquo; crash instantly &mdash; it flags undefined variables automatically.</li>
+          <li><b>No tests.</b> Every change is checked by hand. Even a handful of tests on the pure logic (club search, trip building) would catch regressions.</li>
+          <li><b>Two libraries float on their latest version</b> (Supabase, D3) with no lock &mdash; a library update could silently break login for everyone, at a time you didn't choose.</li>
+          <li><b>Scripts load from 3 different CDNs with no integrity check</b> &mdash; if any were compromised, an attacker could run code on your users. A build step (above) removes this risk entirely.</li>
+          <li>One library (<code>html-to-image</code>) is loaded on every page but never used &mdash; remove it.</li>
+        </ul>
+        <div class="prompt">
+          <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+          <pre>Add ESLint + Prettier with a sensible React config and fix what they flag
+(there's at least one undefined-variable bug). Add Vitest and write tests for
+the pure functions (club search/matching, trip building). Pin every dependency
+to an exact version. Remove the unused html-to-image library from index.html.</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>Housekeeping:</b> commit messages are all &ldquo;update1&rdquo;, &ldquo;meh&rdquo;, &ldquo;u1&rdquo; &mdash; when something breaks in a month, history won't help you find when. A one-line habit (&ldquo;fix trial column bug&rdquo;) pays for itself the first time you need it. There's also some leftover dead code (an unused old map system) safe to delete.
+    </div>
+    <div class="prompt" style="max-width:var(--read);">
+      <div class="prompt-top"><span class="label">&#9656; Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre>Housekeeping in the Groundhopr repo: delete the confirmed dead code -- the
+unused pre-Leaflet map system (MAP_PATHS_UNUSED, toMapXY, STADIUM_COORDS,
+findCoords) and any other unreferenced helpers -- after checking nothing calls
+them. From now on use short, specific git commit messages (e.g. "fix trial
+column bug", "add bottom nav") instead of "update1" / "meh".</pre>
+    </div>
+  </section>
+
+  <!-- 6. PERF -->
+  <section id="perf">
+    <div class="sec-head"><span class="idx">08</span><h2>Speed &amp; loading</h2></div>
+    <p class="sec-note">Mostly downstream of the build-step point above, plus a couple of easy asset wins.</p>
+    <ul class="checks bad">
+      <li><b>Slow first paint</b> from transpiling 6,000 lines in the browser &mdash; solved by the Vite build step.</li>
+      <li><b>Heavy images and video.</b> Several photos are 400&ndash;850 KB and the hero background video is ~5 MB, loaded with no compression, modern format, or lazy-loading. Converting to WebP/AVIF and adding <code>loading="lazy"</code> is a big, easy win on mobile data.</li>
+      <li><b>The offline cache re-downloads the whole app every visit.</b> The service worker tries the network first, so repeat visits don't benefit from the cache unless fully offline. A &ldquo;show cached instantly, update in background&rdquo; strategy makes return visits feel instant.</li>
+    </ul>
+    <div class="prompt">
+      <div class="prompt-top"><span class="label">▸ Give this to Claude Code</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre>Two performance passes for Groundhopr. (1) Optimise assets in public/: convert
+the large JPEGs and the hero-bg.mp4 to compressed modern formats (WebP/AVIF for
+images), add width/height and loading="lazy" to &lt;img&gt; tags, and serve responsibly
+sized versions. (2) Change public/sw.js from network-first to stale-while-
+revalidate for the app shell so repeat visits load from cache instantly and
+update in the background; and automate the CACHE_NAME version bump.</pre>
+    </div>
+  </section>
+
+  <!-- 7. ROADMAP -->
+  <section id="roadmap">
+    <div class="sec-head"><span class="idx">09</span><h2>A sensible order to tackle it</h2></div>
+    <p class="sec-note">Don't try to do everything at once. Three passes, in this order:</p>
+    <div class="road">
+      <div class="road-item now">
+        <div class="when">Pass 1<br>This week</div>
+        <div>
+          <h3>Stop the leaks</h3>
+          <p>Lock down the AI endpoint, verify database security (RLS), and make Pro un-fakeable + wire the Stripe webhook. These are live money/data risks &mdash; nothing else matters until they're done.</p>
+        </div>
+      </div>
+      <div class="road-item next">
+        <div class="when">Pass 2<br>Next</div>
+        <div>
+          <h3>Fix what's visibly broken</h3>
+          <p>The download crash, the disappearing trial, the fake Attendees/Contact/theme features, the unearnable badges. All small, all quick, all things a user can hit today.</p>
+        </div>
+      </div>
+      <div class="road-item later">
+        <div class="when">Pass 3<br>A free weekend</div>
+        <div>
+          <h3>Rebuild the flow &amp; strengthen the foundation</h3>
+          <p>The big one: rebuild the trip flow as a guided wizard (Section 05). Alongside it, add the Vite build step (unlocks speed, tests, linting, safer dependencies), then the UX refinements: bottom nav, a free &ldquo;taste&rdquo; before the gate, mobile ticket download, image optimisation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. HOW TO -->
+  <section id="howto">
+    <div class="sec-head"><span class="idx">10</span><h2>How to use the prompt blocks</h2></div>
+    <div class="prose">
+      <p>Every dark box marked <b>&ldquo;Give this to Claude Code&rdquo;</b> is written to be pasted straight into your AI coding assistant, in the Groundhopr project folder. Hit <b>Copy</b>, paste it in, and let it propose the change &mdash; then read what it did before accepting.</p>
+      <p>A few tips for a first-time builder:</p>
+      <ul class="checks good">
+        <li><b>Do them one at a time</b>, in the order above &mdash; don't paste five prompts at once.</li>
+        <li><b>After each change, test the actual thing</b> in the browser before moving on.</li>
+        <li>For the <b>database (Supabase) items</b>, the fix is partly in the Supabase dashboard, not just code &mdash; the assistant can give you the exact SQL to paste there.</li>
+        <li>The three <b>Critical</b> items touch money and security &mdash; if anything is unclear, it's worth asking the assistant to <i>explain</i> the change before applying it.</li>
+      </ul>
+      <div class="callout" style="margin-top:22px;"><b>Final word:</b> this is a real, working, thoughtfully-monetised product with genuine personality &mdash; a strong first app. The problems here are the normal problems of a fast first build, and every one of them is fixable in an evening. Fix the three leaks this week, and you've got something solid to keep growing.</div>
+    </div>
+  </section>
+
+  <div class="foot">
+    <p class="tag-line">Every ground has a story. ⚽✈</p>
+    <p>Independent code &amp; product review of Groundhopr &middot; prepared as a senior engineer and product designer &middot; based on a full read of the codebase and a hands-on walkthrough of the live app. Findings that depend on server/database configuration are flagged &ldquo;to confirm&rdquo; and should be verified in the Supabase dashboard.</p>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var body = document.getElementById('wz-body');
+    if (!body) return;
+    var steps = [
+      { t: "Pick your fixture", s: "Ajax · Johan Cruyff Arena · Amsterdam", multi: false, kind: "choose",
+        opts: [
+          { h: "Ajax vs PSV Eindhoven", d: "Sat 22 Mar · 16:30 · Home" },
+          { h: "Ajax vs Feyenoord", d: "Sun 06 Apr · 14:30 · Home" },
+          { h: "Ajax vs AZ Alkmaar", d: "Sat 19 Apr · 18:45 · Home" }
+        ] },
+      { t: "Getting there", s: "Sat 22 Mar · from London", multi: false, kind: "act",
+        opts: [
+          { h: "✈ Flights from £68 return", d: "London → Amsterdam · 1h 20m", cta: true },
+          { h: "🚆 Or take the train", d: "Eurostar via Brussels · from £79" }
+        ] },
+      { t: "Where to stay", s: "1 night · near the ground", multi: false, kind: "act",
+        opts: [
+          { h: "🏨 Hotel by the arena", d: "from £94 / night · 8 min walk", cta: true },
+          { h: "🏙 Stay in the centre", d: "from £110 / night · livelier" }
+        ] },
+      { t: "Your match ticket", s: "Ajax vs PSV · 16:30", multi: false, kind: "act",
+        opts: [
+          { h: "🎟 Official Ajax ticket office", d: "Members' sale opens ~3 weeks before", cta: true },
+          { h: "Sold out? Trusted resale", d: "Verified P1 Travel packages" }
+        ] },
+      { t: "Things to do", s: "Amsterdam · matchday", multi: true, kind: "choose",
+        opts: [
+          { h: "🏟 Johan Cruyff Arena tour", d: "90 min · behind the scenes" },
+          { h: "🚤 Canal cruise", d: "1 hr · the classic" },
+          { h: "🖼 Rijksmuseum", d: "if you've a spare morning" }
+        ] },
+      { t: "Pre-match", s: "Where the fans go", multi: true, kind: "choose",
+        opts: [
+          { h: "🍺 Café by the ground", d: "Home-fan spot · busy from 2pm" },
+          { h: "🏙 City-centre fan bar", d: "Mixed crowd · big screens" }
+        ] },
+      { t: "Bring your mates", s: "Share the plan with your group", multi: false, kind: "invite", opts: [] }
+    ];
+    var n = steps.length;
+    var idx = 0;
+    var sel = {};
+    var attendees = [];
+
+    var elFill = document.getElementById('wz-fill');
+    var elStep = document.getElementById('wz-step');
+    var elPct = document.getElementById('wz-pct');
+    var elTitle = document.getElementById('wz-title');
+    var elSub = document.getElementById('wz-sub');
+    var elBack = document.getElementById('wz-back');
+    var elSkip = document.getElementById('wz-skip');
+    var elNext = document.getElementById('wz-next');
+
+    function esc(t) { return String(t).replace(/</g, '&lt;'); }
+
+    function render() {
+      var done = idx >= n;
+      var pct = done ? 100 : Math.round((idx / n) * 100);
+      elFill.style.width = Math.max(pct, 6) + '%';
+      elStep.textContent = done ? 'All done' : ('Step ' + (idx + 1) + ' of ' + n);
+      elPct.textContent = pct + '% planned';
+
+      if (done) { renderDone(); return; }
+      var st = steps[idx];
+      elTitle.textContent = st.t;
+      elSub.textContent = st.s;
+      elBack.disabled = idx === 0;
+      elSkip.style.display = '';
+      elNext.textContent = (idx === n - 1) ? 'Finish ✓' : 'Continue';
+
+      if (st.kind === 'invite') { renderInvite(); return; }
+      sel[idx] = sel[idx] || {};
+      var html = st.opts.map(function (o, i) {
+        return '<button type="button" class="wz-opt ' + (o.cta ? 'cta' : '') + ' ' + (sel[idx][i] ? 'sel' : '') + '" data-i="' + i + '">' +
+          '<span class="oh">' + o.h + '</span><span class="od">' + o.d + '</span></button>';
+      }).join('');
+      if (st.kind === 'act') html += '<div class="wz-note">Tap to mark it sorted — you can always change it later</div>';
+      else if (st.multi) html += '<div class="wz-note">Pick as many as you fancy</div>';
+      body.innerHTML = html;
+    }
+
+    function renderInvite() {
+      elNext.textContent = 'Finish ✓';
+      body.innerHTML =
+        '<div class="wz-invrow"><input class="wz-input" id="wz-email" type="email" placeholder="mate@email.com" />' +
+        '<button class="wz-addbtn" id="wz-add" type="button">Add</button></div>' +
+        '<div class="wz-chips" id="wz-chips"></div>' +
+        '<div class="wz-note">They’ll get the full plan — flights, hotel, ticket, the lot</div>';
+      renderChips();
+      var input = document.getElementById('wz-email');
+      var add = document.getElementById('wz-add');
+      function addOne() {
+        var v = (input.value || '').trim();
+        if (v) { attendees.push(v); input.value = ''; renderChips(); }
+        input.focus();
+      }
+      add.addEventListener('click', addOne);
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); addOne(); } });
+    }
+
+    function renderChips() {
+      var wrap = document.getElementById('wz-chips');
+      if (!wrap) return;
+      wrap.innerHTML = attendees.map(function (a, i) {
+        return '<span class="wz-chip">' + esc(a) + '<button type="button" data-x="' + i + '" aria-label="remove">×</button></span>';
+      }).join('');
+      wrap.querySelectorAll('button[data-x]').forEach(function (b) {
+        b.addEventListener('click', function () { attendees.splice(+b.dataset.x, 1); renderChips(); });
+      });
+    }
+
+    function renderDone() {
+      elTitle.textContent = 'Passport stamped';
+      elSub.textContent = 'Ajax away day — sorted';
+      elBack.disabled = false;
+      elSkip.style.display = 'none';
+      elNext.textContent = 'Start over';
+      var review = steps.map(function (st, i) {
+        var ok = (st.kind === 'invite') ? attendees.length > 0 : (sel[i] && Object.keys(sel[i]).some(function (k) { return sel[i][k]; }));
+        return '<div class="wz-rev ' + (ok ? 'ok' : '') + '"><span class="rk">' + (ok ? '✓' : '–') + '</span> ' + st.t + '</div>';
+      }).join('');
+      body.innerHTML =
+        '<div class="wz-done"><div class="wz-stamp">⚽</div>' +
+        '<div class="wz-doneh">Your Ajax away day is planned</div>' +
+        '<div class="wz-donesub">Now the fun bit: time to book it.</div>' +
+        '<div class="wz-revwrap">' + review + '</div>' +
+        '<button class="wz-share" id="wz-book" type="button">✈ Book your flights →</button>' +
+        '<button class="wz-mapbtn" id="wz-view" type="button">See my full trip →</button>' +
+        '<div class="wz-note" style="margin-top:10px;">Next you book each part, flights first. You can share your passport once it is booked.</div></div>';
+      var bk = document.getElementById('wz-book');
+      if (bk) bk.addEventListener('click', function () { bk.textContent = '✈ Opening flights…'; });
+      var vw = document.getElementById('wz-view');
+      if (vw) vw.addEventListener('click', function () { var t = document.getElementById('td-proto'); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
+    }
+
+    body.addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('.wz-opt') : null;
+      if (!b || idx >= n) return;
+      var st = steps[idx];
+      var i = +b.dataset.i;
+      sel[idx] = sel[idx] || {};
+      if (st.multi) { sel[idx][i] = !sel[idx][i]; }
+      else { sel[idx] = {}; sel[idx][i] = true; }
+      render();
+    });
+    elNext.addEventListener('click', function () { if (idx >= n) { idx = 0; sel = {}; initDefaults(); attendees = []; } else { idx++; } render(); });
+    elBack.addEventListener('click', function () { if (idx > 0) { idx--; render(); } });
+    elSkip.addEventListener('click', function () { if (idx < n) { idx++; render(); } });
+
+    function initDefaults() {
+      for (var i = 0; i < n; i++) {
+        var st = steps[i];
+        if (st.kind !== 'invite' && st.opts.length) { sel[i] = { 0: true }; }
+      }
+    }
+    initDefaults();
+    render();
+  })();
+</script>
+
+<script>
+  (function () {
+    var body = document.getElementById('td-body');
+    if (!body) return;
+    var items = [
+      { ic: '✈', lab: 'Flights', det: 'London → Amsterdam · £68', type: 'book', booked: true },
+      { ic: '🏨', lab: 'Hotel', det: 'By the arena · £94/night', type: 'book', booked: false },
+      { ic: '🎟', lab: 'Match ticket', det: 'Ajax vs PSV · 16:30', type: 'book', booked: false },
+      { ic: '🎯', lab: 'Things to do', det: 'Arena tour · canal cruise', type: 'book', booked: false },
+      { ic: '🍺', lab: 'Pre-match', det: 'Café by the ground', type: 'saved' },
+      { ic: '👥', lab: 'Your group', det: 'You + Dave', type: 'group' }
+    ];
+    var fill = document.getElementById('td-fill');
+    var ptext = document.getElementById('td-progtext');
+    var ppct = document.getElementById('td-progpct');
+    var foot = document.getElementById('td-foot');
+    function bookable() { return items.filter(function (i) { return i.type === 'book'; }); }
+    function bookedCount() { return bookable().filter(function (i) { return i.booked; }).length; }
+
+    function render() {
+      var rows = items.map(function (it, i) {
+        var right;
+        if (it.type === 'book') {
+          right = it.booked
+            ? '<span class="td-pill booked" data-t="' + i + '" title="Tap to undo">✓ Booked</span>'
+            : '<button class="td-book" data-b="' + i + '" type="button">Book →</button>';
+        } else if (it.type === 'saved') { right = '<span class="td-pill saved">📍 Saved</span>'; }
+        else { right = '<button class="td-ghost" type="button">Invite</button>'; }
+        return '<div class="td-row"><div class="td-ic">' + it.ic + '</div><div class="td-meta">' +
+          '<div class="td-lab">' + it.lab + '</div><div class="td-det">' + it.det + '</div></div>' + right + '</div>';
+      }).join('');
+
+      var b = bookedCount(), t = bookable().length, pct = Math.round(b / t * 100);
+      var banner = (b === t) ? '<div class="td-banner">🎉 You are all set — Ajax away day is booked</div>' : '';
+      body.innerHTML = banner + rows;
+      fill.style.width = pct + '%';
+      ptext.textContent = b + ' of ' + t + ' booked';
+      ppct.textContent = pct + '%';
+
+      if (b === t) {
+        foot.innerHTML = '<button class="wz-next" id="td-share" type="button" style="flex:1;">📤 Share your trip</button>' +
+          '<button class="wz-mapbtn" id="td-map" type="button" style="margin-top:0;flex:1;">📍 Add to map</button>';
+        var s = document.getElementById('td-share'); s.addEventListener('click', function () { s.textContent = '✓ Link copied!'; });
+        var m = document.getElementById('td-map'); m.addEventListener('click', function () { m.textContent = '✓ Added'; });
+      } else {
+        var next = bookable().find(function (i) { return !i.booked; });
+        foot.innerHTML = '<div class="wz-note" style="margin:0;text-align:left;">Next up: <b style="color:var(--ink);">book your ' +
+          next.lab.toLowerCase() + '</b> &middot; ' + (t - b) + ' left</div>';
+      }
+    }
+
+    body.addEventListener('click', function (e) {
+      var bk = e.target.closest ? e.target.closest('.td-book') : null;
+      var pl = e.target.closest ? e.target.closest('.td-pill.booked') : null;
+      if (bk) { items[+bk.dataset.b].booked = true; render(); }
+      else if (pl) { items[+pl.dataset.t].booked = false; render(); }
+    });
+    render();
+  })();
+</script>
+
+<script>
+  (function () {
+    var tl = document.getElementById('ma-tl');
+    if (!tl) return;
+    var events = [
+      { t: '11:20', w: 'Land at Schiphol', s: 'Flight from London' },
+      { t: '12:30', w: 'Drop your bags', s: 'Hotel by the arena' },
+      { t: '14:00', w: 'Pre-match pint', s: 'Café by the ground', now: true },
+      { t: '15:45', w: 'Walk to the ground', s: '8 min from the café' },
+      { t: '16:30', w: 'Kickoff — Ajax vs PSV', s: 'Johan Cruyff Arena', ko: true }
+    ];
+    tl.innerHTML = events.map(function (e) {
+      return '<div class="ma-ev ' + (e.now ? 'now' : '') + ' ' + (e.ko ? 'ko' : '') + '">' +
+        '<span class="ma-line"></span><span class="ma-dot"></span>' +
+        '<div class="ma-time">' + e.t + '</div><div class="ma-what">' + e.w + '</div><div class="ma-sub">' + e.s + '</div></div>';
+    }).join('');
+    var actions = document.getElementById('ma-actions');
+    actions.innerHTML =
+      '<button class="ma-act" id="ma-tkt" type="button"><div class="ai">🎟</div><div class="al">Ticket</div></button>' +
+      '<button class="ma-act" id="ma-dir" type="button"><div class="ai">🧭</div><div class="al">Directions</div></button>' +
+      '<button class="ma-act" type="button"><div class="ai">☔</div><div class="al">12° · Clear</div></button>';
+    var twrap = document.getElementById('ma-ticket');
+    var open = false;
+    document.getElementById('ma-tkt').addEventListener('click', function () {
+      open = !open;
+      twrap.innerHTML = open
+        ? '<div class="ma-ticket"><div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;">Ajax vs PSV · 16:30</div>' +
+          '<div class="ma-qr"></div><div style="font-weight:800;font-size:15px;">Gate C · Block 410 · Row 12</div>' +
+          '<div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:3px;">Show this at the turnstile</div></div>'
+        : '';
+    });
+    document.getElementById('ma-dir').addEventListener('click', function () {
+      var al = this.querySelector('.al'); if (al) al.textContent = 'Opening maps…';
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var view = document.getElementById('rm-view');
+    if (!view) return;
+    var seg = document.querySelector('#rm-proto .rm-seg');
+    var rating = 4, cur = 'map';
+    function mapView() {
+      var pins = [[22, 60], [40, 38], [55, 68], [68, 30], [33, 72], [62, 50], [50, 22]];
+      var dots = pins.map(function (p) { return '<span class="rm-pin" style="left:' + p[0] + '%;top:' + p[1] + '%;"></span>'; }).join('');
+      dots += '<span class="rm-pin new" style="left:46%;top:46%;"></span>';
+      return '<div class="rm-stats">' +
+        '<div class="rm-stat"><div class="n">12</div><div class="l">Grounds</div></div>' +
+        '<div class="rm-stat"><div class="n">4</div><div class="l">Countries</div></div>' +
+        '<div class="rm-stat"><div class="n">6</div><div class="l">Badges</div></div></div>' +
+        '<div class="rm-map">' + dots + '</div>' +
+        '<div class="rm-cap">Newest: <b style="color:var(--ink);">Johan Cruyff Arena</b>, Amsterdam</div>';
+    }
+    function keepView() {
+      var stars = '';
+      for (var i = 1; i <= 5; i++) { stars += '<span data-s="' + i + '">' + (i <= rating ? '★' : '☆') + '</span>'; }
+      return '<div class="rm-ticket"><span class="kt-bar"></span>' +
+        '<div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:700;">Groundhopr · Ground #12</div>' +
+        '<div style="font-size:22px;font-weight:800;margin:6px 0 2px;">Johan Cruyff Arena</div>' +
+        '<div style="font-size:13px;color:rgba(255,255,255,.7);">⚽ Ajax 2–1 PSV · Sat 22 Mar</div>' +
+        '<div class="rm-stars" id="rm-stars">' + stars + '</div>' +
+        '<div style="font-size:12px;color:rgba(255,255,255,.5);">📍 Amsterdam, Netherlands</div></div>' +
+        '<button class="wz-next" id="rm-share" type="button" style="width:100%;margin-top:10px;">📤 Share keepsake</button>' +
+        '<button class="wz-mapbtn" id="rm-dl" type="button" style="width:100%;">⬇ Download ticket</button>';
+    }
+    function render() {
+      view.innerHTML = (cur === 'map') ? mapView() : keepView();
+      if (cur === 'keep') {
+        var st = document.getElementById('rm-stars');
+        st.addEventListener('click', function (e) { var b = e.target.closest('[data-s]'); if (b) { rating = +b.dataset.s; render(); } });
+        var sh = document.getElementById('rm-share'); sh.addEventListener('click', function () { sh.textContent = '✓ Link copied!'; });
+        var dl = document.getElementById('rm-dl'); dl.addEventListener('click', function () { dl.textContent = '✓ Saved to photos'; });
+      }
+    }
+    seg.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-v]'); if (!b) return;
+      cur = b.dataset.v;
+      seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); });
+      render();
+    });
+    render();
+  })();
+</script>
+
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var pre = btn.closest('.prompt').querySelector('pre');
+      var text = pre.innerText;
+      var done = function () {
+        var old = btn.textContent;
+        btn.textContent = '✓ Copied';
+        setTimeout(function () { btn.textContent = old; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function () {
+          fallback(text); done();
+        });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  h3[id] { scroll-margin-top: 24px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  .sidenav { display: none; }
+  @media (min-width: 1200px) {
+    body { padding-left: 262px; }
+    .sidenav {
+      display: block; position: fixed; top: 0; left: 0; bottom: 0; width: 262px;
+      overflow-y: auto; padding: 26px 16px 48px; border-right: 1px solid var(--line);
+      background: var(--panel-2); z-index: 50;
+    }
+  }
+  .sidenav::-webkit-scrollbar { width: 9px; }
+  .sidenav::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--muted) 30%, transparent); border-radius: 6px; }
+  .sidenav-title { font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: var(--muted);
+    font-weight: 800; margin: 0 8px 16px; }
+  .sidenav ul { list-style: none; margin: 0; padding: 0; }
+  .sidenav .s-item { margin-bottom: 3px; }
+  .s-link { display: flex; gap: 9px; align-items: baseline; padding: 7px 9px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 700; color: var(--ink-soft); text-decoration: none; border: none; line-height: 1.3; }
+  .s-link span:last-child { flex: 1; }
+  .s-idx { font-family: var(--mono); font-size: 10px; color: var(--accent); font-weight: 700; }
+  .s-link:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); color: var(--ink); }
+  .s-link.active { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--ink); }
+  .s-link.active-parent { color: var(--ink); }
+  .s-subs { margin: 3px 0 10px; padding-left: 10px; margin-left: 9px; border-left: 1.5px solid var(--line); }
+  .sub-link { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    padding: 5px 8px; font-size: 11.8px; line-height: 1.32; color: var(--muted); text-decoration: none; border: none; border-radius: 6px; }
+  .sub-link:hover { color: var(--green); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  .sub-link.active { color: var(--green); font-weight: 700; background: color-mix(in srgb, var(--accent) 12%, transparent); }
+</style>
+<script>
+  (function () {
+    var wrap = document.querySelector('.wrap');
+    if (!wrap) return;
+    var secs = Array.prototype.slice.call(wrap.querySelectorAll(':scope > section[id]'))
+      .filter(function (s) { return s.id !== 'contents'; });
+    if (!secs.length) return;
+
+    var nav = document.createElement('nav');
+    nav.className = 'sidenav';
+    nav.setAttribute('aria-label', 'Report contents');
+    var html = '<div class="sidenav-title">Groundhopr review</div><ul>';
+
+    secs.forEach(function (sec) {
+      var h2 = sec.querySelector('.sec-head h2');
+      if (!h2) return;
+      var idxEl = sec.querySelector('.sec-head .idx');
+      var idx = idxEl ? idxEl.textContent.trim() : '';
+      html += '<li class="s-item"><a class="s-link" data-target="' + sec.id + '" href="#' + sec.id + '">' +
+        (idx ? '<span class="s-idx">' + idx + '</span>' : '') + '<span>' + h2.textContent.trim() + '</span></a>';
+      var subs = Array.prototype.slice.call(sec.querySelectorAll('h3'));
+      if (subs.length) {
+        html += '<ul class="s-subs">';
+        subs.forEach(function (h3, i) {
+          if (!h3.id) h3.id = sec.id + '-h' + i;
+          var txt = h3.textContent.trim();
+          html += '<li><a class="sub-link" data-target="' + h3.id + '" data-parent="' + sec.id +
+            '" href="#' + h3.id + '" title="' + txt.replace(/"/g, '&quot;') + '">' + txt + '</a></li>';
+        });
+        html += '</ul>';
+      }
+      html += '</li>';
+    });
+    html += '</ul>';
+    nav.innerHTML = html;
+    document.body.insertBefore(nav, document.body.firstChild);
+
+    var links = Array.prototype.slice.call(nav.querySelectorAll('a[data-target]'));
+    var map = links.map(function (a) {
+      return { a: a, el: document.getElementById(a.getAttribute('data-target')), parent: a.getAttribute('data-parent') };
+    }).filter(function (o) { return o.el; });
+
+    var raf = null;
+    function spy() {
+      raf = null;
+      var best = null, bestTop = -1e9;
+      map.forEach(function (o) {
+        var top = o.el.getBoundingClientRect().top;
+        if (top <= 150 && top > bestTop) { bestTop = top; best = o; }
+      });
+      links.forEach(function (a) { a.classList.remove('active', 'active-parent'); });
+      if (best) {
+        best.a.classList.add('active');
+        if (best.parent) {
+          var pl = nav.querySelector('.s-link[data-target="' + best.parent + '"]');
+          if (pl) pl.classList.add('active-parent');
+        }
+        var nr = nav.getBoundingClientRect(), lr = best.a.getBoundingClientRect();
+        if (lr.top < nr.top + 50) nav.scrollTop -= (nr.top + 50 - lr.top);
+        else if (lr.bottom > nr.bottom - 20) nav.scrollTop += (lr.bottom - (nr.bottom - 20));
+      }
+    }
+    window.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(spy); }, { passive: true });
+    window.addEventListener('resize', function () { if (!raf) raf = requestAnimationFrame(spy); }, { passive: true });
+    spy();
+  })();
+</script>
+
+</body>
+</html>
