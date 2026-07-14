@@ -207,7 +207,7 @@
   /* ---- TOC ---- */
   .toc { background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 24px; margin: 0 0 10px; }
   .toc h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 0 0 14px; }
-  .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: t; columns: 2; column-gap: 34px; }
+  .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: t -1; columns: 2; column-gap: 34px; }
   @media (max-width: 640px) { .toc ol { columns: 1; } }
   .toc li { counter-increment: t; padding: 6px 0; break-inside: avoid; }
   .toc li a { border: none; color: var(--ink-soft); font-size: 14.5px; display: flex; gap: 11px; }
@@ -268,11 +268,33 @@
     <div class="dim"><span class="name">Foundations (build/tests)</span><span class="track"><span class="fill" style="width:30%;background:var(--crit)"></span></span><span class="val">3.0</span></div>
   </div>
 
+  <!-- GETTING STARTED -->
+  <section id="getstarted" style="margin-top:44px;">
+    <div class="sec-head"><span class="idx">00</span><h2>New to this? Start here</h2></div>
+    <p class="sec-note">This whole report is built to be actionable. Wherever you see a dark <b>&ldquo;Give this to Claude Code&rdquo;</b> box, that's an instruction you paste into an AI assistant that reads and edits your code for you &mdash; you don't need to be technical. Here's the easy way to get set up, then you can work through the fixes one at a time.</p>
+
+    <div class="callout"><b>One thing first:</b> Claude Code needs a <b>paid Claude plan</b> (Pro or higher) &mdash; the free plan doesn't include it. You can subscribe at <a href="https://claude.com/pricing">claude.com/pricing</a>.</div>
+
+    <div class="play">
+      <div class="play-item"><div class="play-num">1</div><div><h4>Get the project onto your computer</h4><p>You already have the Groundhopr folder if you built it. If not, open your GitHub repo, click the green <b>Code</b> button &rarr; <b>Download ZIP</b>, and unzip it somewhere you'll remember.</p></div></div>
+      <div class="play-item"><div class="play-num">2</div><div><h4>Install the Claude desktop app</h4><p>Go to <a href="https://claude.ai">claude.ai</a> and download the desktop app for Mac or Windows. Run the installer, open the app, and sign in with your paid account. <i>(On Windows, also install Git from git-scm.com first &mdash; Claude Code needs it.)</i></p></div></div>
+      <div class="play-item"><div class="play-num">3</div><div><h4>Click the &ldquo;Code&rdquo; tab</h4><p>Along the top of the app you'll see <b>Chat</b>, <b>Cowork</b> and <b>Code</b>. Click <b>Code</b>.</p></div></div>
+      <div class="play-item"><div class="play-num">4</div><div><h4>Point it at your project</h4><p>Click <b>Select folder</b>, choose your Groundhopr folder, and open it. Claude can now see all your code.</p></div></div>
+      <div class="play-item"><div class="play-num">5</div><div><h4>Warm up</h4><p>Type <code>What does this project do?</code> and press enter. Claude reads the code and explains it back &mdash; a good sign everything's connected properly.</p></div></div>
+      <div class="play-item"><div class="play-num">6</div><div><h4>Use the prompts in this report</h4><p>Copy a &ldquo;Give this to Claude Code&rdquo; box, paste it in, press enter. Claude shows you exactly what it wants to change (a <b>diff</b>) &mdash; read it, then click <b>Accept</b> or <b>Reject</b>. Do <b>one prompt at a time</b> and check the app after each.</p></div></div>
+    </div>
+
+    <div class="callout"><b>How to work through it:</b> start at <a href="#week">01 &mdash; Fix this week</a> (the money and security items), then the shipped bugs, then the bigger design work. One box at a time: accept, test, move on. If a change ever looks wrong, click <b>Reject</b> &mdash; nothing is permanent until you accept it.</div>
+
+    <p class="sec-note" style="margin-top:18px;"><b>Don't want to install anything?</b> You can use <a href="https://claude.ai/code">claude.ai/code</a> in a browser instead &mdash; it connects to your GitHub repo and works in the cloud. And once you're comfortable there's a more powerful terminal version. But the desktop app above is the simplest place to start.</p>
+  </section>
+
   <!-- TOC -->
   <section id="contents" style="margin-top:44px;">
     <div class="toc">
       <h2>What's in here</h2>
       <ol>
+        <li><a href="#getstarted">New to this? Start here (using Claude Code)</a></li>
         <li><a href="#week">Fix this week &mdash; the 3 money/security leaks</a></li>
         <li><a href="#bugs">Shipped bugs users hit right now</a></li>
         <li><a href="#good">What's working well</a></li>
